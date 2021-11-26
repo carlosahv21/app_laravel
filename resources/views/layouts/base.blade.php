@@ -49,6 +49,9 @@
     <!-- Datepicker -->
     <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker.min.js"></script>
 
+    <!-- DataTables -->
+   <script src="/assets/js/simple-datatables.js"></script>
+
     <!-- Sweet Alerts 2 -->
     <script src="/assets/js/sweetalert2.all.min.js"></script>
 
@@ -67,6 +70,8 @@
     <!-- Volt JS -->
     <script src="/assets/js/volt.js"></script>
 
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/a5347400c8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

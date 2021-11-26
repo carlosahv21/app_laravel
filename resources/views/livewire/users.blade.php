@@ -1,3 +1,5 @@
+@section('title','Usuario')
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
     <div class="d-block mb-4 mb-md-0">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -12,12 +14,10 @@
                         </svg>
                     </a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Volt</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Users List</li>
+                <li class="breadcrumb-item"><a href="#">Jointrust</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Lista de Usuarios</li>
             </ol>
         </nav>
-        <h2 class="h4">Users List</h2>
-        <p class="mb-0">Your web analytics dashboard template.</p>
     </div>
     <div class="btn-toolbar mb-2 mb-md-0">
         <a href="#" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
@@ -110,10 +110,6 @@
         </div>
     </div>
 </div>
-<div class="alert alert-danger" role="alert">
-    Add, Edit, Delete features are not functional. This is a PRO feature! Click <a
-        href="https://volt-pro-laravel-admin-dashboard.updivision.com/" target="_blank">here</a> to see the PRO product.
-</div>
 <div class="card card-body shadow border-0 table-wrapper table-responsive">
     <div class="d-flex mb-3">
         <select class="form-select fmxw-200" aria-label="Message select example">
@@ -124,24 +120,51 @@
         </select>
         <button class="btn btn-sm px-3 btn-secondary ms-3">Apply</button>
     </div>
-    <table class="table user-table table-hover align-items-center">
-        <thead>
+    <table class="table user-table align-items-center">
+        <thead class="thead-light">
             <tr>
-                <th class="border-bottom">
+                <th>
                     <div class="form-check dashboard-check">
                         <input class="form-check-input" type="checkbox" value="" id="userCheck55">
                         <label class="form-check-label" for="userCheck55">
                         </label>
                     </div>
                 </th>
-                <th class="border-bottom">Name</th>
-                <th class="border-bottom">Role</th>
-                <th class="border-bottom">Date Created</th>
-                <th class="border-bottom">Status</th>
-                <th class="border-bottom">Action</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Direccion</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($users as $user)
+                <tr>
+                    <td>
+                        <div class="form-check dashboard-check">
+                            <input class="form-check-input" type="checkbox" value="" id="userCheck1">
+                            <label class="form-check-label" for="userCheck1">
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#" class="d-flex align-items-center">
+                            <img src="../assets/img/team/profile-picture-1.jpg" class="avatar rounded-circle me-3"
+                                alt="Avatar">
+                            <div class="d-block">
+                                <span class="fw-bold">{{ $user->first_name . " ". $user->last_name }}</span>
+                                <div class="small text-gray">{{ $user->email }}</div>
+                            </div>
+                        </a>
+                    </td>
+                    <th>{{ $user->role }}</th>
+                    <th>{{ $user->address }}</th>
+                    <th style="width: 5%;">
+                        
+                    </th>
+                </tr>
+            @endforeach
+        </tbody>
+        {{-- <tbody>
             <tr>
                 <td>
                     <div class="form-check dashboard-check">
@@ -188,6 +211,6 @@
                     </div>
                 </td>
             </tr>
-        </tbody>
+        </tbody> --}}
     </table>
 </div>
