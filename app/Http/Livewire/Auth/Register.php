@@ -10,9 +10,7 @@ use Illuminate\Support\Str;
 class Register extends Component
 {
 
-    public $email = '';
-    public $password = '';
-    public $passwordConfirmation = '';
+    public $email ,$password, $passwordConfirmation = '';
 
     public function mount()
     {
@@ -37,6 +35,7 @@ class Register extends Component
             'email' =>$this->email,
             'password' => Hash::make($this->password),
             'remember_token' => Str::random(10),
+            'role' => 'client'
         ]);
 
         auth()->login($user);

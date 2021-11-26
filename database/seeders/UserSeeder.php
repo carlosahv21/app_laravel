@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'last_name' => 'User',
             'email' => 'admin@volt.com',
             'password' => Hash::make('secret'),
+            'role' => 'admin',
         ]);
     }
 }
