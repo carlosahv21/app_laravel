@@ -19,7 +19,8 @@ class UserForm extends Component
     public $modelId;
     
     protected $listeners = [
-        'getModelId'
+        'getModelId',
+        'forcedCloseModal'
     ];
 
     public function getModelId($modelId)
@@ -77,6 +78,16 @@ class UserForm extends Component
         $this->location = null;
         $this->role = null;
         $this->identificacion = null;
+    }
+
+    public function forcedCloseModal()
+    {
+        // This is to reset our public variables
+        $this->clearForm();
+
+        // These will reset our error bags
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     public function rules() {

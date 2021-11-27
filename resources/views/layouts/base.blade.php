@@ -97,6 +97,12 @@
         window.addEventListener('closeDeleteModal', event => {
             $("#deleteUser").modal('hide');
         })  
+
+        $(document).ready(function(){
+            $("#createUser").on('hidden.bs.modal', function(){
+                livewire.emit('forcedCloseModal');
+            });
+        });
     </script>
 </body>
 
