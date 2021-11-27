@@ -7,10 +7,15 @@ use App\Models\User;
 
 class Users extends Component
 {
+    
+    protected $listeners = [
+        'refreshParent' => '$refresh'
+    ];
+
     public function render()
     {
         return view('livewire.users', 
-            ['users' => User::orderBy('id','asc')->paginate(1)]
+            ['users' => User::orderBy('id','asc')->paginate(5)]
         );
     }
 }
