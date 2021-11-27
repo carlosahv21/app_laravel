@@ -86,6 +86,10 @@
             $('#createUser').modal('hide');
         })
 
+        window.addEventListener('openModal', event => {
+            $("#createUser").modal('show');
+        })
+
         window.addEventListener('openDeleteModal', event => {
             $("#deleteUser").modal('show');
         })

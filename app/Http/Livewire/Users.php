@@ -22,6 +22,9 @@ class Users extends Component
         
         if($action == 'delete'){
             $this->dispatchBrowserEvent('openDeleteModal');
+        }else{
+            $this->dispatchBrowserEvent('openModal');
+            $this->emit('getModelId', $this->item);
         }
     }
 

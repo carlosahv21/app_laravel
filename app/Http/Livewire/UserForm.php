@@ -16,10 +16,37 @@ class UserForm extends Component
     public $location;
     public $role;
     public $identificacion;
+    public $modelId;
+    
+    protected $listeners = [
+        'getModelId'
+    ];
+
+    public function getModelId($modelId)
+    {
+        $this->modelId = $modelId;
+
+        $model = User::find($this->modelId);
+
+        $this->first_name = $model->first_name;
+        $this->last_name = $model->last_name;
+        $this->email = $model->email;
+        $this->phone = $model->phone;
+        $this->address = $model->address;
+        $this->neighborhood = $model->neighborhood;
+        $this->location = $model->location;
+        $this->role = $model->role;
+        $this->identificacion = $model->identificacion;
+    }
 
     public function save()
     {
-        $user = new User;
+        if($this->modelId){
+            $user = User::findOrFail($this->modelId);
+        }else{
+            $user = new User;
+        }
+
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->email = $this->email;
@@ -40,6 +67,7 @@ class UserForm extends Component
 
     private function clearForm()
     {
+        $this->modelId = null;
         $this->first_name = null;
         $this->last_name = null;
         $this->email = null;
@@ -55,7 +83,7 @@ class UserForm extends Component
         return [
             'first_name' => 'required|max:15',
             'last_name' => 'required|max:20',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'phone' => 'required',
             'address' => 'required|max:40',
             'neighborhood' => 'required',

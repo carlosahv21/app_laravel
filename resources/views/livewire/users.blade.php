@@ -116,7 +116,7 @@
                                     <i class="fas fa-ellipsis-h"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item btn-outline-gray-500" href="#"><i class="fas fa-eye"></i> Ver</a></li>
+                                    <li><a wire:click="selectItem({{ $user->id }}, 'update')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
                                     @if ($user->role != 'admin')
                                         <li><button wire:click="selectItem({{ $user->id }}, 'delete')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-trash"></i> Eliminar</button></li>
                                     @endif
