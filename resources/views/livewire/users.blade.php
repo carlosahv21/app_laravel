@@ -24,20 +24,6 @@
                 <button type="button" class="btn btn-sm btn-outline-gray-600">Export</button>
             </div>
         </div>
-        <!-- Modal -->
-        <div wire:ignore.self class="modal fade" id="createUser" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="h6 modal-title">Crear Usuario</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        @livewire('user-form')
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="table-settings mb-4">
@@ -132,7 +118,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item btn-outline-gray-500" href="#"><i class="fas fa-eye"></i> Ver</a></li>
                                     @if ($user->role != 'admin')
-                                        <li><button class="dropdown-item btn-outline-gray-500" data-bs-toggle="modal" data-bs-target="#delete-{{ $user->id }}"><i class="fas fa-trash"></i> Eliminar</button></li>
+                                        <li><button wire:click="selectItem({{ $user->id }}, 'delete')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-trash"></i> Eliminar</button></li>
                                     @endif
                                     </ul>
                                 </li>
@@ -145,5 +131,37 @@
                 {{ $users->links()}}
             </div>
         @endif
+    </div>
+    <!-- Modal Add-->
+    <div wire:ignore.self class="modal fade" id="createUser" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Crear Usuario</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @livewire('user-form')
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Delete-->
+    <div wire:ignore.self class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Eliminar Usuario</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseas eliminar este registro?
+                </div>
+                <div class="modal-footer">
+                    <button wire:click="delete" class="btn btn-secondary">Eliminar</button>
+                    <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

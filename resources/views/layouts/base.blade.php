@@ -5,7 +5,7 @@
     <!-- Apex Charts -->
     <link type="text/css" href="/vendor/apexcharts/apexcharts.css" rel="stylesheet">
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <!-- Datepicker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
@@ -64,6 +64,9 @@
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <!-- Volt JS -->
     <script src="/assets/js/volt.js"></script>
@@ -79,10 +82,17 @@
 
     @livewireScripts
     <script>
-        window.livewire.on('confirm', () => {
-            const createUser = document.getElementById('createUser');
-            createUser.hide();
-        }); 
+        window.addEventListener('closeModal', () => {
+            $('#createUser').modal('hide');
+        })
+
+        window.addEventListener('openDeleteModal', event => {
+            $("#deleteUser").modal('show');
+        })
+
+        window.addEventListener('closeDeleteModal', event => {
+            $("#deleteUser").modal('hide');
+        })  
     </script>
 </body>
 

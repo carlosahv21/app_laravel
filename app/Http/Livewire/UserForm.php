@@ -33,7 +33,7 @@ class UserForm extends Component
         $this->validate();
         $user->save();
         
-        $this->emit('confirm');
+        $this->dispatchBrowserEvent('closeModal');
         $this->emit('refreshParent');
         $this->clearForm();
     }
@@ -55,7 +55,7 @@ class UserForm extends Component
         return [
             'first_name' => 'required|max:15',
             'last_name' => 'required|max:20',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'phone' => 'required',
             'address' => 'required|max:40',
             'neighborhood' => 'required',
