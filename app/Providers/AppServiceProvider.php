@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
 
         Validator::replacer('customPassCheckHashed', function ($message, $attribute, $rule, $parameters) {
             return 'The current password you entered did not match with the password from the database!';
+        });
+
+        Builder::macro('search', function ($field, $string){
+            return $string ? $this->where($field, 'like', '%'.$string.'%') : $this;
         });
     }
 }

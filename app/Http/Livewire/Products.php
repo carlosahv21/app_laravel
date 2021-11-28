@@ -9,7 +9,8 @@ use Livewire\WithPagination;
 class Products extends Component
 {
     use WithPagination;
-    public $item, $action = '';
+    public $item, $action, $search, $countProduct = '';
+    public $selected = [];
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
@@ -22,6 +23,9 @@ class Products extends Component
         
         if($action == 'delete'){
             $this->dispatchBrowserEvent('openModal', ['name' => 'deleteProduct']);
+        }else if($action == 'masiveDelete'){
+            $this->dispatchBrowserEvent('openModal', ['name' => 'deleteProductMassive']);
+            $this->countProduct = count($this->selected);
         }else{
             $this->dispatchBrowserEvent('openModal', ['name' => 'createProduct']);
             $this->emit('getModelId', $this->item);
@@ -37,10 +41,21 @@ class Products extends Component
 
     }
 
+    public function massiveDelete()
+    {
+        $products = Product::whereKey($this->selected);
+        $products->delete();
+
+        $this->selected = null;
+
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'deleteProductMassive']);
+
+    }
+
     public function render()
     {
         return view('livewire.products', 
-            ['products' => Product::orderBy('id','asc')->paginate(5)]
+            ['products' => Product::search('name', $this->search)->paginate(10)]
         );
     }
 }

@@ -9,7 +9,8 @@ use Livewire\WithPagination;
 class Users extends Component
 {
     use WithPagination;
-    public $item, $action = '';
+    public $item, $action, $search, $countUsers = '';
+    public $selected = [];
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
@@ -22,10 +23,23 @@ class Users extends Component
         
         if($action == 'delete'){
             $this->dispatchBrowserEvent('openModal', ['name' => 'deleteUser']);
+        }else if($action == 'masiveDelete'){
+            $this->dispatchBrowserEvent('openModal', ['name' => 'deleteUserMasive']);
+            $this->countUsers = count($this->selected);
         }else{
             $this->dispatchBrowserEvent('openModal', ['name' => 'createUser']);
             $this->emit('getModelId', $this->item);
         }
+    }
+
+    public function massiveDelete()
+    {
+        $users = User::whereKey($this->selected);
+        $users->delete();
+        $this->selected = null;
+
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'deleteUserMasive']);
+
     }
 
     public function delete()
@@ -40,7 +54,7 @@ class Users extends Component
     public function render()
     {
         return view('livewire.users', 
-            ['users' => User::orderBy('id','asc')->paginate(5)]
+            ['users' => User::search('first_name', $this->search)->paginate(10)]
         );
     }
 }

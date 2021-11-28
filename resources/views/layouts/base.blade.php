@@ -22,6 +22,9 @@
     <!-- Volt CSS -->
     <link type="text/css" href="/css/volt.css" rel="stylesheet">
 
+    <!-- Jointrust CSS -->
+    <link type="text/css" href="/assets/css/jointrust.css" rel="stylesheet">
+
     @livewireStyles
 
     <!-- Core -->
