@@ -37,12 +37,14 @@ class Profile extends Component
 
     public function testListen()
     {
-        $this->dispatchBrowserEvent('openModalPass');
+        $this->dispatchBrowserEvent('openModal', ['name' => 'changePass']);
         $this->emit('changePass', $this->user->password);
     }
 
     public function save(){
+
         $this->validate();
+        $this->user->email_verified_at = 'yes';
         $this->user->save();
 
         $this->showSavedAlert = true;   

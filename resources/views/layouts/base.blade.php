@@ -82,29 +82,14 @@
 
     @livewireScripts
     <script>
-        window.addEventListener('closeModal', () => {
-            $('#createUser').modal('hide');
+
+        window.addEventListener('closeModal', event => {
+            $('#'+event.detail.name).modal('hide');
         })
 
         window.addEventListener('openModal', event => {
-            $("#createUser").modal('show');
+            $('#'+event.detail.name).modal('show');
         })
-
-        window.addEventListener('openDeleteModal', event => {
-            $("#deleteUser").modal('show');
-        })
-
-        window.addEventListener('closeDeleteModal', event => {
-            $("#deleteUser").modal('hide');
-        })  
-
-        window.addEventListener('openModalPass', event => {
-            $("#changePass").modal('show');
-        })
-
-        window.addEventListener('closeModalPass', event => {
-            $("#changePass").modal('hide');
-        }) 
         
         $(document).ready(function(){
             $("#createUser").on('hidden.bs.modal', function(){

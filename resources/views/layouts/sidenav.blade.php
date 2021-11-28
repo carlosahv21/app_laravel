@@ -29,13 +29,21 @@
           </span>
         </a>
       </li>
-      <li class="nav-item {{ Request::segment(1) == 'users' ? 'active' : '' }}">
-        <a href="/users" class="nav-link">
-          <span class="sidebar-icon"><i class="fas fa-users"></i></span>
-          <span class="sidebar-text">Usuarios</span>
-        </a>
-      </li>
-      <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+      @if (auth()->user()->role == 'admin')
+        <li class="nav-item {{ Request::segment(1) == 'users' ? 'active' : '' }}">
+          <a href="/users" class="nav-link">
+            <span class="sidebar-icon"><i class="fas fa-users"></i></span>
+            <span class="sidebar-text">Usuarios</span>
+          </a>
+        </li>
+        <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+        <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
+          <a href="/products" class="nav-link">
+            <span class="sidebar-icon"><i class="fas fa-box"></i></span>
+            <span class="sidebar-text">Productos</span>
+          </a>
+        </li>
+      @endif
     </ul>
   </div>
 </nav>

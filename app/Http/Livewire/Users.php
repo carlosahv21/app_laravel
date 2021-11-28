@@ -21,9 +21,9 @@ class Users extends Component
         $this->item = $item;
         
         if($action == 'delete'){
-            $this->dispatchBrowserEvent('openDeleteModal');
+            $this->dispatchBrowserEvent('openModal', ['name' => 'deleteUser']);
         }else{
-            $this->dispatchBrowserEvent('openModal');
+            $this->dispatchBrowserEvent('openModal', ['name' => 'createUser']);
             $this->emit('getModelId', $this->item);
         }
     }
@@ -33,7 +33,7 @@ class Users extends Component
         $user = User::findOrFail($this->item);
         $user->delete();
 
-        $this->dispatchBrowserEvent('closeDeleteModal');
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'deleteUser']);
 
     }
 

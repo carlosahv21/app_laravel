@@ -30,7 +30,7 @@ class ChangePass extends Component
         $user->password = Hash::make($this->password);
         $user->save();
 
-        $this->dispatchBrowserEvent('closeModalPass');
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'changePass']);
         $this->clearFormPass();
 
     }
