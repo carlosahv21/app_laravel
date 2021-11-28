@@ -32,11 +32,10 @@ class Login extends Component
             $user = User::where(['email' => $this->email])->first();
             auth()->login($user, $this->remember_me);
 
-            if($user->email_verified_at == null){
+            if($user->email_verified_at == null && $user->role != 'admin'){
                 return redirect('/profile');
-            }else{
-                return redirect()->intended('/dashboard');
             }
+            return redirect()->intended('/dashboard');
         } else {
             return $this->addError('email', trans('auth.failed'));
         }

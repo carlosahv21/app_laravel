@@ -75,15 +75,17 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="col-6 p-2">
-                            <label for="inputTipo" class="form-label">Rol <span class="text-danger"> *</span></label>
-                            <select wire:model="user.role" class="form-select" id="inputTipo">
-                                <option value="admin">Admin</option>
-                                <option value="client">Cliente</option>
-                                <option value="domiciliary">Domiciliario</option>
-                                </select>
-                                
-                        </div>
+                        @if (auth()->user()->role == 'admin')
+                            <div class="col-6 p-2">
+                                <label for="inputTipo" class="form-label">Rol <span class="text-danger"> *</span></label>
+                                <select wire:model="role" class="form-select" id="inputTipo">
+                                    <option value="admin">Admin</option>
+                                    <option value="client">Cliente</option>
+                                    <option value="domiciliary">Domiciliario</option>
+                                    </select>
+                                    
+                            </div>
+                        @endif
                         <div class="col-6 p-2">
                             <label for="inputIdentificacion" class="form-label">NIT / CC </label>
                             <input wire:model="user.identificacion" type="text" class="form-control" placeholder="Ej: 123456789-0" id="inputIdentificacion">
