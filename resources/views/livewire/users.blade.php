@@ -118,7 +118,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a wire:click="selectItem({{ $user->id }}, 'update')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
                                     @if ($user->role != 'admin')
-                                        <li><button wire:click="selectItem({{ $user->id }}, 'delete')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-trash"></i> Eliminar</button></li>
+                                        <li><button wire:click="selectItem({{ $user->id }}, 'delete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button></li>
                                     @endif
                                     </ul>
                                 </li>
@@ -130,6 +130,8 @@
             <div class="d-flex justify-content-end py-4">
                 {{ $users->links()}}
             </div>
+        @else
+            No hay usuarios para mostrar
         @endif
     </div>
     <!-- Modal Add-->

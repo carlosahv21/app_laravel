@@ -83,9 +83,11 @@
                                 </label>
                             </div>
                         </th>
-                        <th>Nombre</th>
-                        <th>Rol</th>
-                        <th>Direccion</th>
+                        <th>Nombre del Producto</th>
+                        <th>Referencia</th>
+                        <th>Presentación</th>
+                        <th>Precio</th>
+                        <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -99,18 +101,17 @@
                                     </label>
                                 </div>
                             </td>
-                            <td>
-                                <a href="#" class="d-flex align-items-center">
-                                    <img src="../assets/img/team/profile-picture-1.jpg" class="avatar rounded-circle me-3"
-                                        alt="Avatar">
-                                    <div class="d-block">
-                                        <span class="fw-bold">{{ $product->first_name . " ". $product->last_name }}</span>
-                                        <div class="small text-gray">{{ $product->email }}</div>
-                                    </div>
-                                </a>
-                            </td>
-                            <th>{{ $product->role }}</th>
-                            <th>{{ $product->address }}</th>
+                            <th>{{ strtoupper($product->name) }}</th>
+                            <th>{{ $product->reference }}</th>
+                            <th>{{ $product->presentation }}</th>
+                            <th>{{ $product->price }}</th>
+                            <th> 
+                                @if ($product->product_image )
+                                    {{-- Aqui iria la imagen --}}
+                                @else
+                                    No posee imagen
+                                @endif
+                            </th>
                             <th style="width: 5%;">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-h"></i>
@@ -118,7 +119,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a wire:click="selectItem({{ $product->id }}, 'update')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
                                     @if ($product->role != 'admin')
-                                        <li><button wire:click="selectItem({{ $product->id }}, 'delete')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-trash"></i> Eliminar</button></li>
+                                        <li ><button wire:click="selectItem({{ $product->id }}, 'delete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button></li>
                                     @endif
                                     </ul>
                                 </li>
@@ -130,6 +131,8 @@
             <div class="d-flex justify-content-end py-4">
                 {{ $products->links()}}
             </div>
+        @else
+            No hay productos para mostrar
         @endif
     </div>
     <!-- Modal Add-->
