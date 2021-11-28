@@ -12,35 +12,40 @@ class Profile extends Component
     public User $user;
     public $showSavedAlert = false;
     public $showDemoNotification = false;
+    
+    protected $listeners = [
+        'refreshParent' => '$refresh'
+    ];
 
     public function rules() {
+        return [
+            'user.first_name' => 'required|max:15',
+            'user.last_name' => 'required|max:20',
+            'user.email' => 'required|email',
+            'user.phone' => 'required',
+            'user.address' => 'required|max:40',
+            'user.neighborhood' => 'required',
+            'user.location' => 'required',
+            'user.role' => 'required',
+            'user.identificacion' => 'required',
+        ];
+    }
 
-    return [
-        'user.first_name' => 'max:15',
-        'user.last_name' => 'max:20',
-        'user.email' => 'email',
-        'user.gender' => ['required', Rule::in(['Male', 'Female', 'Other'])],
-        'user.address' => 'max:40',
-        'user.number' => 'numeric',
-        'user.city' => 'max:20',
-        'user.ZIP' => 'numeric',
-    ];
-}
+    public function mount() {
+        $this->user = auth()->user(); 
+    }
 
-    public function mount() { $this->user = auth()->user(); }
-
-    public function save()
+    public function testListen()
     {
-        if(env('IS_DEMO')) {
-            $this->showDemoNotification = true;
-        }
-        else {
-        $this->validate();
+        $this->dispatchBrowserEvent('openModalPass');
+        $this->emit('changePass', $this->user->password);
+    }
 
+    public function save(){
+        $this->validate();
         $this->user->save();
 
         $this->showSavedAlert = true;   
-        }
     }
 
     public function render()

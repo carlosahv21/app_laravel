@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserForm extends Component
 {
@@ -57,6 +58,7 @@ class UserForm extends Component
         $user->location = $this->location;
         $user->role = $this->role;
         $user->identificacion = $this->identificacion;
+        $user->password = Hash::make('123456');
 
         $this->validate();
         $user->save();
@@ -82,7 +84,7 @@ class UserForm extends Component
 
     public function forcedCloseModal()
     {
-        // This is to reset our public variables
+        // This is to <re></re>set our public variables
         $this->clearForm();
 
         // These will reset our error bags
@@ -94,7 +96,7 @@ class UserForm extends Component
         return [
             'first_name' => 'required|max:15',
             'last_name' => 'required|max:20',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'phone' => 'required',
             'address' => 'required|max:40',
             'neighborhood' => 'required',

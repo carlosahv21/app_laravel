@@ -98,6 +98,14 @@
             $("#deleteUser").modal('hide');
         })  
 
+        window.addEventListener('openModalPass', event => {
+            $("#changePass").modal('show');
+        })
+
+        window.addEventListener('closeModalPass', event => {
+            $("#changePass").modal('hide');
+        }) 
+        
         $(document).ready(function(){
             $("#createUser").on('hidden.bs.modal', function(){
                 livewire.emit('forcedCloseModal');
