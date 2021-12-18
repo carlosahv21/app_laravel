@@ -1,4 +1,4 @@
-@section('title','Pedidos')
+@section('title','Agregar Pedido')
 
 <div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -11,172 +11,155 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#">Jointrust</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Lista de Pedidos</li>
+                    <li class="breadcrumb-item active" aria-current="page">Agregar Pedido</li>
                 </ol>
             </nav>
         </div>
-        {{-- <div class="btn-toolbar mb-2 mb-md-0">
-            <button class="btn btn-secondary me-2 dropdown-toggle" data-bs-toggle="modal" data-bs-target="#createOrder">
-                <span class="fas fa-plus"></span> Crear Pedidos
-            </button>
-            <div class="btn-group ms-2 ms-lg-3">
-                <button type="button" class="btn btn-sm btn-outline-gray-600">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-gray-600">Export</button>
-            </div>
-        </div> --}}
     </div>
 
-    <div class="table-settings mb-4">
-        <div class="row justify-content-between align-items-center">
-            <div class="col-9 col-lg-9 d-md-flex">
-                <div class="input-group me-2 me-lg-3 fmxw-300">
-                    <span class="input-group-text">
-                        <span class="fas fa-search"></span>
-                    </span>
-                    <input wire:model="search" type="text" class="form-control" placeholder="Buscar pedido">
+    <div>
+        <form>
+            <div class="row">
+                <div class="col-3">
+                    
+                </div>
+                <div class="col-3">
+                    
+                </div>
+                <div class="col-3">
+                    
                 </div>
             </div>
-            {{-- <div class="col-3 col-lg-3 d-md-flex">
-                <select class="form-select fmxw-200" aria-label="Message select example">
-                    <option selected>Bulk Action</option>
-                    <option value="1">Send Email</option>
-                    <option value="2">Change Group</option>
-                    <option value="3">Delete Order</option>
-                </select>
-                <button class="btn btn-sm px-3 btn-secondary ms-3">Apply</button>
-            </div> --}}
-            <div class="col-3 col-lg-3 d-flex justify-content-end">
-                <div class="dropdown px-2">
-                    <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Acción masiva <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><button wire:click="selectItem('','masiveExport')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-download"></i> Exportar</button></li>
-                        <li><button wire:click="selectItem('','masiveDelete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button></li>
-                    </ul>
-                </div>
 
-                <button class="btn btn-secondary me-2 dropdown-toggle" data-bs-toggle="modal" data-bs-target="#createOrder">
-                    <span class="fas fa-plus"></span> Crear Pedidos
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="card shadow border-0 table-wrapper table-responsive">
-        @if ($orders->count())
-            <div wire:loading.class="opacity-50">
-                <table class="table order-table align-items-center">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>
-                                <div class="form-check dashboard-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="orderCheck55">
-                                    <label class="form-check-label" for="orderCheck55">
-                                    </label>
-                                </div>
-                            </th>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                            <th>Direccion</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($orders as $order)
-                            <tr>
+            <div class="card border-0 table-wrapper table-responsive">
+                <div>
+                    <table class="table product-table align-items-center" id='table-data'>
+                        <thead class="thead-dark">
+                            <tr class="text-center">
+                                <th style="width: 25%;">Producto</th>
+                                <th style="width: 10%">Cantidad</th>
+                                <th style="width: 10%">Precio</th>
+                                <th style="width: 10%">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id=clone>
+                                <td >
+                                    <select id="products0" name="products0" name="state">
+                                        <option value="AL">Alabama</option>
+                                        <option value="AK">Alaska</option>
+                                        <option value="AZ">Arizona</option>
+                                        <option value="AR">Arkansas</option>
+                                        <option value="CA">California</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DE">Delaware</option>
+                                        <option value="DC">District Of Columbia</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="GA">Georgia</option>
+                                        <option value="HI">Hawaii</option>
+                                        <option value="ID">Idaho</option>
+                                        <option value="IL">Illinois</option>
+                                        <option value="IN">Indiana</option>
+                                        <option value="IA">Iowa</option>
+                                        <option value="KS">Kansas</option>
+                                        <option value="KY">Kentucky</option>
+                                        <option value="LA">Louisiana</option>
+                                        <option value="ME">Maine</option>
+                                    </select>
+                                </td>
                                 <td>
-                                    <div class="form-check dashboard-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="orderCheck1">
-                                        <label class="form-check-label" for="orderCheck1">
-                                        </label>
+                                    <input class="form-control" type="number" placeholder="No.">
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                        <input class="form-control datepicker-input">
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="#" class="d-flex align-items-center">
-                                        <img src="../assets/img/team/profile-picture-1.jpg" class="avatar rounded-circle me-3"
-                                            alt="Avatar">
-                                        <div class="d-block">
-                                            <span class="fw-bold">{{ $order->first_name . " ". $order->last_name }}</span>
-                                            <div class="small text-gray">{{ $order->email }}</div>
-                                        </div>
-                                    </a>
+                                <td class="text-end">
+                                    <p id="total">
+                                    <i class="fas fa-dollar-sign"></i> 0,00
+                                        <span class="hide"></span>
+                                    </p>
                                 </td>
-                                <th>{{ $order->role }}</th>
-                                <th>{{ $order->address }}</th>
-                                <th style="width: 5%;">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a wire:click="selectItem({{ $order->id }}, 'update')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
-                                        @if ($order->role != 'admin')
-                                            <li><button wire:click="selectItem({{ $order->id }}, 'delete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button></li>
-                                        @endif
-                                        </ul>
-                                    </li>
-                                </th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            <tr class="text-center">
+                                <td colspan="4">
+                                    <a class="text-secondary" id="duplicate"> <i class="fas fa-cart-plus"></i> Agregar Producto </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="d-flex justify-content-end py-4">
-                {{ $order->links()}}
+            <div class="card border-0 shadow components-section my-4">
+                <div class="row">
+                    <div class="col-6 my-4 mx-4">
+                        <label for="textarea">Comentarios</label>
+                        <textarea class="form-control textarea" placeholder="Cuéntanos si tienes alguna sugerencias o recomendación especial." id="textarea" rows="4"></textarea>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-4 d-flex justify-content-end mb-4 py-4">
+                        <div class="mt-4">
+                            <table class="table table-clear">
+                                <tbody>
+                                    <tr>
+                                        <td class="left">
+                                            <strong>Subtotal</strong>
+                                        </td>
+                                        <td class="right">$8.497,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left">
+                                            <strong>Discount (20%)</strong>
+                                        </td>
+                                        <td class="right">$1,699,40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left">
+                                            <strong>VAT (10%)</strong>
+                                        </td>
+                                        <td class="right">$679,76</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left">
+                                            <strong>Total</strong>
+                                        </td>
+                                        <td class="right">
+                                            <strong>$7.477,36</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="right" colspan="2">
+                                            <div class="mt-2">
+                                                <p>¿Aceptarías recibir una entrega parcial de tu pedido?</p>
+                                                <div class="row text-center">
+                                                    <div class="col-6">
+                                                        
+                                                        <input class="form-check-input" type="radio" name="delivery" id="exampleRadios1" value="Obvio" > Obvio microbio                
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input class="form-check-input" type="radio" name="delivery" id="exampleRadios1" value="Pailas" > Pailas
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-end" colspan="2">
+                                            <button type="button" class="btn btn-link text-gray-600">Cancelar</button>
+                                            <button class="btn btn-secondary" >Hacer pedido</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-        @else
-            <div class="d-flex justify-content-center py-6">
-                <span class="text-gray-500"><i class="fas fa-archive"></i>  No hay pedidos para mostrar </span>
-            </div>
-        @endif
+        </form>
     </div>
-    <!-- Modal Add-->
-    <div wire:ignore.self class="modal fade" id="createOrder" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="h6 modal-title">Crear Pedidos</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{-- @livewire('order-form') --}}
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Delete-->
-    <div wire:ignore.self class="modal fade" id="deleteOrder" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="h6 modal-title">Eliminar Pedidos</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Deseas eliminar este registro?
-                </div>
-                <div class="modal-footer">
-                    <button wire:click="delete" class="btn btn-secondary">Eliminar</button>
-                    <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Delete Masive-->
-    <div wire:ignore.self class="modal fade" id="deleteOrderMasive" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="h6 modal-title">Eliminar Pedidos</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Deseas eliminar este registro?
-                </div>
-                <div class="modal-footer">
-                    <button wire:click="delete" class="btn btn-secondary">Eliminar</button>
-                    <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div>

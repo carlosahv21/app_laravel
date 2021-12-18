@@ -58,7 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
     Route::get('/users', Users::class)->name('users');
     Route::get('/products', Products::class)->name('products');
+    // Route::get('/orders', Orders::class)->name('orders');
     Route::get('/orders', Orders::class)->name('orders');
+    Route::get('/list_order', Orders::class)->name('list_order');
     Route::get('/login-example', LoginExample::class)->name('login-example');
     Route::get('/register-example', RegisterExample::class)->name('register-example');
     Route::get('/forgot-password-example', ForgotPasswordExample::class)->name('forgot-password-example');

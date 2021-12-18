@@ -51,10 +51,20 @@ class Orders extends Component
 
     }
 
+    public function add(){
+        return view('livewire.orders');
+    }
+
     public function render()
     {
-        return view('livewire.orders', 
+        
+        if(request()->route()->getName() == "orders"){
+            return view('livewire.orders');
+        }
+        
+        return view('livewire.list_orders', 
             ['orders' => Order::search('code', $this->search)->paginate(10)]
         );
+        
     }
 }

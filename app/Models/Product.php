@@ -23,4 +23,9 @@ class Product extends Model
         'product_image',
     ];
     protected $guarded=[];
+
+    public function orders()
+    {
+        return $this->belongsToMany('App\Models\Order');
+    }
 }

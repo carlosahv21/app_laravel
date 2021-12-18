@@ -18,7 +18,10 @@
     
     <!-- Notyf -->
     <link type="text/css" href="/vendor/notyf/notyf.min.css" rel="stylesheet">
-    
+
+    <!-- Choices.js -->
+    <link type="text/css" href="/assets/css/choices.min.css" rel="stylesheet">
+
     <!-- Volt CSS -->
     <link type="text/css" href="/css/volt.css" rel="stylesheet">
 
@@ -51,13 +54,13 @@
     <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker.min.js"></script>
 
     <!-- DataTables -->
-   <script src="/assets/js/simple-datatables.js"></script>
+    <script src="/assets/js/simple-datatables.js"></script>
 
     <!-- Sweet Alerts 2 -->
     <script src="/assets/js/sweetalert2.all.min.js"></script>
 
-    <!-- Moment JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <!-- Choices.js -->
+    <script src="/assets/js/choices.min.js"></script>
 
     <!-- Notyf -->
     <script src="/vendor/notyf/notyf.min.js"></script>
@@ -98,7 +101,67 @@
             $("#createUser").on('hidden.bs.modal', function(){
                 livewire.emit('forcedCloseModal');
             });
-        });
+
+            $('#duplicate').on('click', function(e) {
+                var $tr = $(this).closest('tr').siblings().first();
+                var allTrs = $tr.closest('table').find('tr');
+
+                var lastTr = allTrs[allTrs.length-1];
+                var $clone = $($tr).clone();
+
+                $clone.attr('id', '');
+                
+                // Agregar clase para poder obtener el padre al eliminar
+                $clone.addClass('itemDate');
+                $clone.find('input').each(function() {
+                    // Solo establecer el valor
+                    this.value = '';
+                    // Dejar el nombre con corchetes, para que sea un arreglo
+                });
+                // Agregar botón para eliminar
+                $($clone).find('.hide').append('<a class="item-delete text-danger"><i class="fas fa-trash-alt"></i></a>');
+
+                $($clone).insertAfter($tr);
+
+            });
+
+            // Escuchar clic en botón Agregar
+            $('#item-add .button').on('click', add);
+
+            // Escuchar clic en botones para borrar
+            $(document.body).on('click', '.item-delete', removeThisFile);
+
+            });
+
+            function add(){
+                var $tr = $(this).closest('tr').siblings().first();
+                var allTrs = $tr.closest('table').find('tr');
+
+                var lastTr = allTrs[allTrs.length-1];
+                var $clone = $($tr).clone();
+                // Clonar contenedor, eliminar ID
+                let nuevo = $('#itemDate').clone();
+                clone.attr('id', '');
+                
+                // Agregar clase para poder obtener el padre al eliminar
+                nuevo.addClass('itemDate');
+                nuevo.find('input').each(function() {
+                    // Solo establecer el valor
+                    this.value = '';
+                    // Dejar el nombre con corchetes, para que sea un arreglo
+                });
+                // Agregar botón para eliminar
+                $(nuevo).append(' <button class="item-delete">X</button>');
+                // Insertar nuevo contenedor antes del botón "Agregar"
+                $(nuevo).insertBefore('#item-add');
+            }
+            // Función para eliminar
+            function removeThisFile(ele) {
+                // $(this) es el elemento que disparó el evento
+                // ele no es el elemento, sino el evento
+                // Obtener padre por clase, usando closest()
+                $(this).closest('.itemDate').remove();
+            }
     </script>
 </body>
 
