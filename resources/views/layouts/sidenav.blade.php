@@ -43,13 +43,22 @@
             <span class="sidebar-text">Productos</span>
           </a>
         </li>
+        <li class="nav-item {{ Request::segment(1) == 'orders' ? 'active' : '' }}">
+          <a href="/list_order" class="nav-link">
+            <span class="sidebar-icon"><i class="fas fa-file-invoice"></i></span>
+            <span class="sidebar-text">Pedidos</span>
+          </a>
+        </li>
+      @elseif(auth()->user()->role == 'client')
+        <li class="nav-item {{ Request::segment(1) == 'orders' ? 'active' : '' }}">
+          <a href="/orders" class="nav-link">
+            <span class="sidebar-icon"><i class="fas fa-file-invoice"></i></span>
+            <span class="sidebar-text">Pedidos</span>
+          </a>
+        </li>
+      @else
+        
       @endif
-      <li class="nav-item {{ Request::segment(1) == 'orders' ? 'active' : '' }}">
-        <a href="/list_order" class="nav-link">
-          <span class="sidebar-icon"><i class="fas fa-file-invoice"></i></span>
-          <span class="sidebar-text">Pedidos</span>
-        </a>
-      </li>
     </ul>
   </div>
 </nav>

@@ -142,9 +142,15 @@
             <span class="fas fa-plus"></span>
           </a>
           <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1 shadow-lg">
+            @if (auth()->user()->role == 'admin')
               <a class="dropdown-item"> <i class="fas fa-users" aria-hidden="true"></i> Agregar Cliente</a>
               <div role="separator" class="dropdown-divider my-1"></div>
               <a class="dropdown-item"> <i class="fas fa-box" aria-hidden="true"></i> Agregar Producto</a>
+            @elseif(auth()->user()->role == 'client')
+              <a class="dropdown-item"> <i class="fas fa-file-invoice" aria-hidden="true"></i> Agregar Pedido</a>
+            @else
+
+            @endif
           </div>
         </li>
         <li class="nav-item dropdown ms-lg-3">
@@ -166,7 +172,7 @@
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
                   clip-rule="evenodd"></path>
               </svg>
-              My Profile
+              Perfil
             </a>
             <div role="separator" class="dropdown-divider my-1"></div>
             <a class="dropdown-item d-flex align-items-center">

@@ -332,4 +332,115 @@ d.addEventListener("DOMContentLoaded", function(event) {
         const choices = new Choices(selectStateInputEl); 
             }
 
+
+    //Main Chart
+    var options = {
+        chart: {
+            height: 420,
+            type: "area",
+            fontFamily: 'Inter',
+            foreColor: '#4B5563',
+            toolbar: {
+                show: true,
+                offsetX: 0,
+                offsetY: 0,
+                tools: {
+                    download: false,
+                    selection: false,
+                    zoom: false,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: false,
+                    reset: false | '<img src="/static/icons/reset.png" width="20">',
+                    customIcons: []
+                },
+                export: {
+                    csv: {
+                        filename: undefined,
+                        columnDelimiter: ',',
+                        headerCategory: 'category',
+                        headerValue: 'value',
+                        dateFormatter(timestamp) {
+                            return new Date(timestamp).toDateString()
+                        }
+                    }
+                },
+                autoSelected: 'zoom'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        tooltip: {
+            style: {
+                fontSize: '14px',
+                fontFamily: 'Inter',
+            },
+        },
+        theme: {
+            monochrome: {
+                enabled: true,
+                color: '#FB503B',
+            }
+        },
+        grid: {
+            show: true,
+            borderColor: '#FB503B',
+            strokeDashArray: 1,
+        },
+        series: [
+            {
+                name: "Sales",
+                data: [95, 52, 78, 45, 19, 53, 60]
+            }
+        ],
+        markers: {
+            size: 5,
+            strokeColors: '#ffffff',
+            hover: {
+                size: undefined,
+                sizeOffset: 3
+            }
+        },
+        xaxis: {
+            categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
+            labels: {
+                style: {
+                    fontSize: '12px',
+                    fontWeight: 500,
+                },
+            },
+            axisBorder: {
+                color: '#FB503B',
+            },
+            axisTicks: {
+                color: '#FB503B',
+            }
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: ['#FB503B'],
+                    fontSize: '12px',
+                    fontWeight: 500,
+                },
+            },
+        },
+        responsive: [
+            {
+                breakpoint: 768,
+                options: {
+                    yaxis: {
+                        show: false,
+                    }
+                }
+            }
+        ]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    if (document.getElementById('chart')) {
+        chart.render();
+    }
+
 });

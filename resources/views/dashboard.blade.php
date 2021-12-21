@@ -1,7 +1,7 @@
 @section('title','Dashboard')
 
 @if (auth()->user()->role == 'admin')
-<div class="row">
+<div class="row mt-4">
     <div class="col-12 col-sm-6 col-xl-4 mb-4">
         <div class="card border-0 shadow">
             <div class="card-body">
@@ -128,9 +128,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="fw-bolder text-gray-900" scope="row">
+                            <td class="fw-bolder text-gray-900">
                                 Jhon Doe
-                            </th>
+                            </td>
                             <td class="fw-bolder text-danger text-500">
                                 02/12/2021
                             </td>
@@ -170,9 +170,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th class="fw-bolder text-gray-900" scope="row">
+                            <td class="fw-bolder text-gray-900">
                                 Jhon Doe
-                            </th>
+                            </td>
                             <td class="fw-bolder text-danger text-500">
                                 No entregado
                             </td>
@@ -190,7 +190,115 @@
     </div>
 </div>
 @elseif(auth()->user()->role == 'client')
-
+<div class="row mt-4">
+    <div class="col-12 mb-4">
+        <div class="card border-0 shadow" style="background-color: #fac0b9">
+            <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                <div class="d-block mb-3 mb-sm-0">
+                    <div class="fs-5 fw-normal mb-2">Productos mas pedidos</div>
+                </div>
+                <div class="d-flex ms-auto">
+                    <a href="#" class="btn btn-secondary btn-sm me-2">Month</a>
+                    <a href="#" class="btn btn-sm me-3">Week</a>
+                </div>
+            </div>
+            <div class="card-body p-2">
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-xl-6">
+        <div class="card border-0 shadow">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h2 class="fs-5 fw-bold mb-0">Tus Pedidos este mes</h2>
+                    </div>
+                    <div class="col text-end">
+                        <a href="#" class="btn btn-sm btn-primary">Ver todos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr>
+                        <th class="border-bottom" scope="col">Pedido</th>
+                        <th class="border-bottom" scope="col">Entregado en</th>
+                        <th class="border-bottom" scope="col">Total</th>
+                        <th class="border-bottom" scope="col">Estado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bolder text-gray-900">
+                                02/12/2021
+                            </td>
+                            <td class="fw-bolder text-gray-900">
+                                Calle 2 #26 - 36
+                            </td>
+                            <td class="fw-bolder text-gray-900">
+                                $ 150.000 
+                            </td>
+                            <td class="fw-bolder text-gray-900">
+                                <span>
+                                    <span class="badge text-white" style="background-color:#10B981">Entregado</span>
+                                </span> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-xl-6">
+        <div class="card border-0 shadow">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h2 class="fs-5 fw-bold mb-0">Entregas para hoy</h2>
+                    </div>
+                    <div class="col text-end">
+                        <a href="#" class="btn btn-sm btn-primary">Ver todas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                {{-- <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr>
+                        <th class="border-bottom" scope="col">Cliente</th>
+                        <th class="border-bottom" scope="col">Estado</th>
+                        <th class="border-bottom" scope="col">Hora de entrega</th>
+                        <th class="border-bottom" scope="col">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bolder text-gray-900">
+                                Jhon Doe
+                            </td>
+                            <td class="fw-bolder">
+                                <span class="badge text-white" style="background-color:#f5365c">No Entregado</span>
+                            </td>
+                            <td class="fw-bolder text-gray-900">
+                                02:00 PM
+                            </td>
+                            <td class="fw-bolder text-gray-900">
+                                $ 150.000 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> --}}
+                <div class="d-flex justify-content-center py-5">
+                    <span class="text-gray-500"><i class="fas fa-archive"></i>  No tienes entregas para el dia de hoy </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @else
 
 @endif
