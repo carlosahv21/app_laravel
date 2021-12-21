@@ -46,19 +46,10 @@
                 <button class="btn btn-sm px-3 btn-secondary ms-3">Apply</button>
             </div> --}}
             <div class="col-3 col-lg-3 d-flex justify-content-end">
-                <div class="dropdown px-2">
-                    <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Acción masiva <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><button wire:click="selectItem('','masiveExport')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-download"></i> Exportar</button></li>
-                        <li><button wire:click="selectItem('','masiveDelete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button></li>
-                    </ul>
-                </div>
 
-                <button class="btn btn-secondary me-2 dropdown-toggle" data-bs-toggle="modal" data-bs-target="#createOrder">
+                <a href="/orders"  class="btn btn-secondary me-2 dropdown-toggle" >
                     <span class="fas fa-plus"></span> Crear Pedidos
-                </button>
+                </a>
             </div>
         </div>
     </div>

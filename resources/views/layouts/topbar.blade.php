@@ -14,7 +14,7 @@
       </div>
       <!-- Navbar links -->
       <ul class="navbar-nav align-items-center">
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link text-dark notification-bell unread dropdown-toggle" data-unread-notifications="true"
             href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
             <svg class="icon icon-sm text-gray-900" fill="currentColor" viewBox="0 0 20 20"
@@ -134,6 +134,17 @@
                 View all
               </a>
             </div>
+          </div>
+        </li> --}}
+        <li class="nav-item dropdown">
+            <a class="nav-link text-dark dropdown-toggle" 
+            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="fas fa-plus"></span>
+          </a>
+          <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1 shadow-lg">
+              <a class="dropdown-item"> <i class="fas fa-users" aria-hidden="true"></i> Agregar Cliente</a>
+              <div role="separator" class="dropdown-divider my-1"></div>
+              <a class="dropdown-item"> <i class="fas fa-box" aria-hidden="true"></i> Agregar Producto</a>
           </div>
         </li>
         <li class="nav-item dropdown ms-lg-3">
