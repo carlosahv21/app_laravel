@@ -185,4 +185,58 @@
             </div>
         </div>
     </div>
+    <!-- Modal Advertisement-->
+    <div wire:ignore.self class="modal fade" id="advertisement" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Anuncio</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="mb-4">Tengo un amig@ que le puede interesar los productos Join Trust
+                    </h6>
+                    <table class="table product-table align-items-center" id='table-data'>
+                        <tbody>
+                            <tr>
+                                <td style="width: 45%">
+                                    <label for="guets_user" class="form-label">Nombre completo</label>
+                                    <input wire:model="guets_user" type="text" class="form-control" id="guets_user">
+                                </td>
+                                <td style="width: 40%">
+                                    <label for="phone" class="form-label">Celular</label>
+                                    <input wire:model="phone" type="text" class="form-control" id="phone">
+                                </td>
+                                <td style="width: 5%">
+                                    <span class="hide" style="top: 15px;position: relative;"></span>
+                                </td>
+                            </tr>
+                            <tr class="text-center">
+                                <td colspan="4">
+                                    <a class="text-secondary" id="duplicate"> <i class="fas fa-cart-plus"></i> Agregar Invitado </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end py-4">
+                        <button wire:click="saveGuest" class="btn btn-secondary">Enviar amigos</button>
+                        <button wire:click="skip" type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Omitir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal FirstTime-->
+    <div wire:ignore.self class="modal fade" id="first_time" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    ¡Felicitaciones, ya eres parte de la familia saludable JoinTrust!
+                    <div class="d-flex justify-content-center py-4">
+                        <button wire:click="first_time" class="btn btn-secondary" data-bs-dismiss="modal">Quiero hacer mi primer pedido!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

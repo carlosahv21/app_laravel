@@ -53,7 +53,26 @@ class Profile extends Component
         $this->user->email_verified_at = 'yes';
         $this->user->save();
 
-        $this->showSavedAlert = true;   
+        if($this->user->advertisement != 'yes'){
+            $this->dispatchBrowserEvent('openModal', ['name' => 'advertisement']);
+        }else{
+            $this->showSavedAlert = true;
+        }
+
+    }
+
+    public function first_time(){
+        $this->user->first_time = 'yes';
+        $this->user->save();
+    }
+
+    public function skip(){
+        $this->user->advertisement = 'yes';
+        $this->user->save();
+
+        if($this->user->first_time != 'yes'){
+            $this->dispatchBrowserEvent('openModal', ['name' => 'first_time']);
+        }
     }
 
     public function render()

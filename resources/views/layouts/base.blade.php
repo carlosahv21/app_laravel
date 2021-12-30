@@ -102,6 +102,13 @@
                 livewire.emit('forcedCloseModal');
             });
 
+            $('#first_time').on('hidden.bs.modal', function(){
+                window.location.href = "{{ route('orders')}}";
+            });
+
+            
+
+            // funcion para duplicar una fila
             $('#duplicate').on('click', function(e) {
                 var $tr = $(this).closest('tr').siblings().first();
                 var allTrs = $tr.closest('table').find('tr');
@@ -143,35 +150,36 @@
 
         });
 
-            function add(){
-                var $tr = $(this).closest('tr').siblings().first();
-                var allTrs = $tr.closest('table').find('tr');
+        function add(){
+            var $tr = $(this).closest('tr').siblings().first();
+            var allTrs = $tr.closest('table').find('tr');
 
-                var lastTr = allTrs[allTrs.length-1];
-                var $clone = $($tr).clone();
-                // Clonar contenedor, eliminar ID
-                let nuevo = $('#itemDate').clone();
-                clone.attr('id', '');
-                
-                // Agregar clase para poder obtener el padre al eliminar
-                nuevo.addClass('itemDate');
-                nuevo.find('input').each(function() {
-                    // Solo establecer el valor
-                    this.value = '';
-                    // Dejar el nombre con corchetes, para que sea un arreglo
-                });
-                // Agregar botón para eliminar
-                $(nuevo).append(' <button class="item-delete">X</button>');
-                // Insertar nuevo contenedor antes del botón "Agregar"
-                $(nuevo).insertBefore('#item-add');
-            }
-            // Función para eliminar
-            function removeThisFile(ele) {
-                // $(this) es el elemento que disparó el evento
-                // ele no es el elemento, sino el evento
-                // Obtener padre por clase, usando closest()
-                $(this).closest('.itemDate').remove();
-            }
+            var lastTr = allTrs[allTrs.length-1];
+            var $clone = $($tr).clone();
+            // Clonar contenedor, eliminar ID
+            let nuevo = $('#itemDate').clone();
+            clone.attr('id', '');
+            
+            // Agregar clase para poder obtener el padre al eliminar
+            nuevo.addClass('itemDate');
+            nuevo.find('input').each(function() {
+                // Solo establecer el valor
+                this.value = '';
+                // Dejar el nombre con corchetes, para que sea un arreglo
+            });
+            // Agregar botón para eliminar
+            $(nuevo).append(' <button class="item-delete">X</button>');
+            // Insertar nuevo contenedor antes del botón "Agregar"
+            $(nuevo).insertBefore('#item-add');
+        }
+
+        // Función para eliminar
+        function removeThisFile(ele) {
+            // $(this) es el elemento que disparó el evento
+            // ele no es el elemento, sino el evento
+            // Obtener padre por clase, usando closest()
+            $(this).closest('.itemDate').remove();
+        }
     </script>
 </body>
 

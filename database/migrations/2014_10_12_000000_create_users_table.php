@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('email_verified_at')->nullable();
             $table->string('confirm')->nullable();
             $table->string('method')->nullable();
+            $table->string('advertisement')->nullable();
+            $table->string('first_time')->nullable();
             $table->rememberToken()->unique();
             $table->timestamps();
         });
