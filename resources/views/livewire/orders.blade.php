@@ -43,30 +43,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id=clone>
+                            <tr>
                                 <td >
-                                    <select id="products0" name="products0" name="state">
-                                        <option value="AL">Alabama</option>
-                                        <option value="AK">Alaska</option>
-                                        <option value="AZ">Arizona</option>
-                                        <option value="AR">Arkansas</option>
-                                        <option value="CA">California</option>
-                                        <option value="CO">Colorado</option>
-                                        <option value="CT">Connecticut</option>
-                                        <option value="DE">Delaware</option>
-                                        <option value="DC">District Of Columbia</option>
-                                        <option value="FL">Florida</option>
-                                        <option value="GA">Georgia</option>
-                                        <option value="HI">Hawaii</option>
-                                        <option value="ID">Idaho</option>
-                                        <option value="IL">Illinois</option>
-                                        <option value="IN">Indiana</option>
-                                        <option value="IA">Iowa</option>
-                                        <option value="KS">Kansas</option>
-                                        <option value="KY">Kentucky</option>
-                                        <option value="LA">Louisiana</option>
-                                        <option value="ME">Maine</option>
-                                    </select>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control product_title" placeholder="Selecciona un producto...">
+                                        <button class="btn btn-pill btn-outline-gray-500 select_product" type="button" data-value="row1"><i class="fas fa-search" aria-hidden="true"></i></button>
+                                      </div>
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" placeholder="No.">
@@ -163,3 +145,4 @@
         </form>
     </div>
 <div>
+@include('livewire.form_orders')

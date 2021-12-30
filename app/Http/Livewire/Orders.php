@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Order;
 use Livewire\WithPagination;
+use App\Models\Product;
 
 class Orders extends Component
 {
@@ -59,7 +60,8 @@ class Orders extends Component
     {
         
         if(request()->route()->getName() == "orders"){
-            return view('livewire.orders');
+            return view('livewire.orders',
+            ['products' => Product::search('name', $this->search)->paginate(10)]);
         }
         
         return view('livewire.list_orders', 
