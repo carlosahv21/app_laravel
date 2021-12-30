@@ -25,7 +25,8 @@ class User extends Authenticatable
     'neighborhood',
     'location',
     'role',
-    'identificacion'
+    'identificacion',
+    'confirm'
     ];
     protected $guarded=[];
 

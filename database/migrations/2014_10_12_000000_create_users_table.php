@@ -27,6 +27,8 @@ class CreateUsersTable extends Migration
             $table->string('user_image')->nullable();
             $table->string('identificacion')->nullable();
             $table->string('email_verified_at')->nullable();
+            $table->string('confirm')->nullable();
+            $table->string('method')->nullable();
             $table->rememberToken()->unique();
             $table->timestamps();
         });

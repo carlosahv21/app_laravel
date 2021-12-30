@@ -131,7 +131,17 @@
             // Escuchar clic en botones para borrar
             $(document.body).on('click', '.item-delete', removeThisFile);
 
-            });
+            // Check buton para perfil
+            $('input[name=confirm]').on('change', function(){
+                var confirm = $('input[name=confirm]:checked').val();
+                if(confirm == 'option1'){
+                    $('#method').hide();
+                }else{
+                    $('#method').show();
+                }
+            })
+
+        });
 
             function add(){
                 var $tr = $(this).closest('tr').siblings().first();

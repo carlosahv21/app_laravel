@@ -96,6 +96,25 @@
                             @endif
                         </div>
                     </div>
+                    @if (auth()->user()->role == 'client')
+                        <div class="row align-items-start p-2">
+                            <div class="col-12 p-2">
+                                <div class="form-check">
+                                    <input wire:model="user.confirm" class="form-check-input" type="radio" name="confirm" id="confirm1" value="option1" checked="">
+                                    <label class="form-check-label" for="confirm1">
+                                        Acepto y autorizo recibir a través de WhatsApp y/o mail la información de productos disponibles del día. 
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input wire:model="user.confirm" class="form-check-input" type="radio" name="confirm" id="confirm2" value="option2">
+                                    <label class="form-check-label" for="confirm2">
+                                        Prefiero otro método. 
+                                    </label>
+                                    <input wire:ignore.self wire:model="user.method"  type="text" class="form-control" placeholder="Cual método?" id="method" style="display: none">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="d-flex justify-content-end py-4">
                         <button type="submit" class="btn btn-secondary">Guardar</button>
                     </div>

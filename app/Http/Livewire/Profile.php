@@ -28,6 +28,8 @@ class Profile extends Component
             'user.location' => 'required',
             'user.role' => 'required',
             'user.identificacion' => 'required',
+            'user.confirm' => 'required',
+            'user.method' => 'max:20'
         ];
     }
 
