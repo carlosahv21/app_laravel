@@ -45,6 +45,10 @@ class Profile extends Component
 
     public function save(){
 
+        if($this->user->confirm == 'option1'){
+            $this->user->method = '';
+        }
+
         $this->validate();
         $this->user->email_verified_at = 'yes';
         $this->user->save();
