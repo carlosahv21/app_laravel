@@ -44,4 +44,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Orders');
     }
+
+    /**
+     * Get all of the guests for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function guests(): HasMany
+    {
+        return $this->hasMany(Guests::class, 'foreign_key', 'local_key');
+    }
 }
