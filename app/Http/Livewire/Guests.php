@@ -75,7 +75,7 @@ class Guests extends Component
         $user->save();
 
         if($user->first_time != 'yes'){
-            $dispatchBrowserEvent('openModal', ['name' => 'first_time']);
+            $this->dispatchBrowserEvent('openModal', ['name' => 'first_time']);
         }
     }
 
