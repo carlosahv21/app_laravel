@@ -98,15 +98,18 @@
         })
         
         $(document).ready(function(){
-            $("#createUser").on('hidden.bs.modal', function(){
-                livewire.emit('forcedCloseModal');
+
+            var modals = ['createUser', 'createProduct'];
+
+            modals.forEach(element => {
+                $("#"+element).on('hidden.bs.modal', function(){
+                    livewire.emit('forcedCloseModal');
+                });
             });
 
             $('#first_time').on('hidden.bs.modal', function(){
                 window.location.href = "{{ route('orders')}}";
             });
-
-            
 
             // funcion para duplicar una fila
             $('#duplicate').on('click', function(e) {

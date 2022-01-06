@@ -14,14 +14,13 @@ class Guests extends Component
 
     protected $rules = [
         'inputs.*.guest_name' => 'required',
-        'inputs.*.guest_phone' => 'required|numeric|max:10',
+        'inputs.*.guest_phone' => 'required|numeric',
     ];
 
     protected $messages = [
         'inputs.*.guest_name.required' => 'This name is required.',
         'inputs.*.guest_phone.required' => 'This phone is required.',
         'inputs.*.guest_phone.numeric' => 'This phone must be numeric.',
-        'inputs.*.guest_phone.max' => 'The phone must not be greater than 10.',
     ];
 
     public function addInput()

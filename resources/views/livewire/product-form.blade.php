@@ -29,7 +29,7 @@
         </div>
         <div class="col-6 p-2">
             <label for="inputPrecio" class="form-label">Precio <span class="text-danger"> *</span></label>
-            <div class="input-group mb-3">
+            <div class="input-group">
                 <span class="input-group-text">$</span>
                 <input wire:model="price" type="text" class="form-control" placeholder="Ej: 100000" id="inputPrecio">
               </div>
@@ -39,8 +39,18 @@
                 </div>
             @endif
         </div>
+        <div class="col-12 p-2">
+            <label for="inputStock" class="form-label">Stock <span class="text-danger"> *</span></label>
+            <input wire:model="stock" type="number" class="form-control" placeholder="Ej: 100" id="inputStock">
+            @if ($errors->has('stock'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('stock') }}
+                </div>
+            @endif
+        </div>
         <div class="d-flex justify-content-end py-4">
             <button wire:click="save" class="btn btn-secondary">Guardar</button>
             <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
+        </div>
     </div>
 </div>

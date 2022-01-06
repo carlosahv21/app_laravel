@@ -20,14 +20,83 @@
     <div>
         <form>
             <div class="row">
-                <div class="col-3">
-                    
+                <div class="col-4">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <div class="text-end" style="margin-top: 25px;">
+                                        <a class="text-secondary"> <small><i class="fas fa-cart-plus"></i> Agregar </small></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3">
-                    
+                <div class="col-4">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <div class="text-end" style="margin-top: 25px;">
+                                        <a class="text-secondary"> <small><i class="fas fa-cart-plus"></i> Agregar </small></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3">
-                    
+                <div class="col-4">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <div class="text-end" style="margin-top: 25px;">
+                                        <a class="text-secondary"> <small><i class="fas fa-cart-plus"></i> Agregar </small></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow my-4">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+                        <div class="card-header border-0 text-center">
+                            <h2 class="h3">Selecciona tu producto</h2>
+                        </div>
+                        <div class="card-body">
+                            <!-- Choice Select -->
+                            <label class="my-1 me-2" for="state">Select state:</label>
+                            <select id="products" class="w-100" name="state">
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -77,6 +146,7 @@
                     </table>
                 </div>
             </div>
+
             <div class="card border-0 shadow components-section my-4">
                 <div class="row">
                     <div class="col-6 my-4 mx-4">

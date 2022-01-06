@@ -327,10 +327,11 @@ d.addEventListener("DOMContentLoaded", function(event) {
             const dataTable = new simpleDatatables.DataTable(dataTableEl);
         }
 
-    var selectStateInputEl = d.querySelector('#products0');
-    if(selectStateInputEl) {
-        const choices = new Choices(selectStateInputEl); 
-            }
+    // Choices.js
+    var selectStateInputEl = d.querySelector('#products');
+    if (selectStateInputEl) {
+        const choices = new Choices(selectStateInputEl);
+    }
 
 
     //Main Chart

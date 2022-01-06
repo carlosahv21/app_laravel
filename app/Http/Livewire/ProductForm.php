@@ -11,6 +11,7 @@ class ProductForm extends Component
     public $reference;
     public $presentation;
     public $price;
+    public $stock;
     public $product_image;
     public $modelId;
     
@@ -29,6 +30,7 @@ class ProductForm extends Component
         $this->reference = $model->reference;
         $this->presentation = $model->presentation;
         $this->price = $model->price;
+        $this->stock = $model->stock;
     }
 
     public function save()
@@ -43,6 +45,8 @@ class ProductForm extends Component
         $product->reference = $this->reference;
         $product->presentation = $this->presentation;
         $product->price = $this->price;
+        $product->stock = $this->stock;
+
 
         $this->validate();
         $product->save();
@@ -58,6 +62,8 @@ class ProductForm extends Component
         $this->reference = null;
         $this->presentation = null;
         $this->price = null;
+        $this->stock = null;
+
     }
 
     public function forcedCloseModal()
@@ -76,6 +82,7 @@ class ProductForm extends Component
             'reference' => 'required',
             'presentation' => 'required',
             'price' => 'required',
+            'stock' => 'required|numeric|gt:0',
         ];
     }
 
