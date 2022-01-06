@@ -61,6 +61,20 @@ class Guests extends Component
         }
     }
 
+    public function first_time(){
+        $this->user->first_time = 'yes';
+        $this->user->save();
+    }
+
+    public function skip(){
+        $this->user->advertisement = 'yes';
+        $this->user->save();
+
+        if($this->user->first_time != 'yes'){
+            $this->dispatchBrowserEvent('openModal', ['name' => 'first_time']);
+        }
+    }
+
 
     public function mount()
     {
