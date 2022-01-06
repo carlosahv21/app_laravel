@@ -62,16 +62,20 @@ class Guests extends Component
     }
 
     public function first_time(){
-        $this->user->first_time = 'yes';
-        $this->user->save();
+        $user = User::findOrFail(auth()->user()->id);
+
+        $user->first_time = 'yes';
+        $user->save();
     }
 
     public function skip(){
-        $this->user->advertisement = 'yes';
-        $this->user->save();
+        $user = User::findOrFail(auth()->user()->id);
 
-        if($this->user->first_time != 'yes'){
-            $this->dispatchBrowserEvent('openModal', ['name' => 'first_time']);
+        $user->advertisement = 'yes';
+        $user->save();
+
+        if($user->first_time != 'yes'){
+            $dispatchBrowserEvent('openModal', ['name' => 'first_time']);
         }
     }
 
