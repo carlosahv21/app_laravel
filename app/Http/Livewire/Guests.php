@@ -61,14 +61,9 @@ class Guests extends Component
         }
     }
 
-    public function first_time(){
-        $user = User::findOrFail(auth()->user()->id);
-
-        $user->first_time = 'yes';
-        $user->save();
-    }
-
     public function skip(){
+        $this->dispatchBrowserEvent('notify', ['type' => 'info', 'message' => 'No podras invitar a tus amigos nuevamente']);
+
         $user = User::findOrFail(auth()->user()->id);
 
         $user->advertisement = 'yes';

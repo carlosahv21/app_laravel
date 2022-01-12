@@ -96,6 +96,52 @@
         window.addEventListener('openModal', event => {
             $('#'+event.detail.name).modal('show');
         })
+
+        window.addEventListener('notify', event => {
+            console.log('si');
+            
+            var backgroud = '';
+            var icon = '';
+            switch (event.detail.type) {
+                case 'success':
+                    backgroud = "10B981";
+                    icon = 'fas fa-check';
+                break;
+                case 'danger':
+                    backgroud = "E11D48";
+                    icon = 'fas fa-exclamation';
+                break;
+                case 'info':
+                    backgroud = "2361CE";
+                    icon = 'fas fa-info';
+                break;
+                default:
+                    break;
+            }
+            
+            const notyf = new Notyf({
+                position: {
+                    x: 'right',
+                    y: 'top',
+                },
+                types: [
+                    {
+                        type: event.detail.type,
+                        background: '#'+backgroud,
+                        icon: {
+                            className: icon,
+                            tagName: 'span',
+                            color: '#fff'
+                        },
+                        dismissible: false
+                    }
+                ]
+            });
+            notyf.open({
+                type: event.detail.type,
+                message: event.detail.message,
+            });
+        })
         
         $(document).ready(function(){
 

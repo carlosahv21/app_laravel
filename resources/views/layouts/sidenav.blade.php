@@ -44,7 +44,7 @@
           </a>
         </li>
         <li class="nav-item {{ Request::segment(1) == 'orders' ? 'active' : '' }}">
-          <a href="/list_order" class="nav-link">
+          <a href="/list-order" class="nav-link">
             <span class="sidebar-icon"><i class="fas fa-file-invoice"></i></span>
             <span class="sidebar-text">Pedidos</span>
           </a>

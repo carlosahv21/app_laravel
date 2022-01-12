@@ -10,13 +10,22 @@ use App\Models\Product;
 class Orders extends Component
 {
     use WithPagination;
-    public $item, $action, $search, $countOrders = '';
+    public $item, $action, $search, $countOrders, $select, $amount = '';
     public $selected = [];
+    public $total = [];
+
+    public $orders_products = [];
+    
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
         'refreshParent' => '$refresh'
     ];
+
+    public function updatedSelect($value)
+    {
+        $select = $value;
+    }
 
     public function selectItem($item, $action)
     {
@@ -52,6 +61,53 @@ class Orders extends Component
 
     }
 
+    public function addProduct()
+    {
+        $product = Product::find($this->select);
+
+        foreach ($product as $key => $value) {
+            $name = $value->name;
+            $price = $value->price;
+        }        
+
+        $this->orders_products->push(
+            [
+                'name' => $name,
+                'price' => $price,
+            ]
+        );
+    }
+
+    public function removeProduct($key)
+    {
+        $this->orders_products->pull($key);
+    }
+
+    public function updatedAmount($qty, $amount)
+    {
+
+        $data = explode("(", $amount);
+
+        $key = $data[0];
+        $price = substr($data[1], 0, -2);
+
+        // dd($key." - ".$price);
+
+        $this->total[$key] = $price;
+    }
+
+    public function recalc($qty)
+    {
+        dd($qty);
+    }
+
+    public function mount()
+    {
+        $this->fill([
+            'orders_products' => collect(array()),
+        ]);
+    }
+
     public function add(){
         return view('livewire.orders');
     }
@@ -59,13 +115,8 @@ class Orders extends Component
     public function render()
     {
         
-        if(request()->route()->getName() == "orders"){
-            return view('livewire.orders',
-            ['products' => Product::search('name', $this->search)->paginate(10)]);
-        }
-        
-        return view('livewire.list_orders', 
-            ['orders' => Order::search('code', $this->search)->paginate(10)]
+        return view('livewire.orders',
+            ['products' => Product::search('name', $this->search)->paginate(10)]
         );
         
     }

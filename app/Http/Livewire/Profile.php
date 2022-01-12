@@ -56,9 +56,16 @@ class Profile extends Component
         if($this->user->advertisement != 'yes'){
             $this->dispatchBrowserEvent('openModal', ['name' => 'advertisement']);
         }else{
-            $this->showSavedAlert = true;
+            $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Perfil salvado!']);
         }
 
+    }
+
+    public function first_time(){
+        $user = User::findOrFail(auth()->user()->id);
+
+        $user->first_time = 'yes';
+        $user->save();
     }
 
     public function render()

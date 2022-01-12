@@ -29,9 +29,15 @@
                             <div class="col-md-6">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    <div class="text-end" style="margin-top: 25px;">
-                                        <a class="text-secondary"> <small><i class="fas fa-cart-plus"></i> Agregar </small></a>
+                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                    <div class="text-end" style="margin-top: 11%;">
+                                        <a class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
+                                            <small>
+                                                <div class="icon-shape icon-xs icon-shape-secondary rounded">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </div>
+                                            </small>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -47,9 +53,15 @@
                             <div class="col-md-6">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    <div class="text-end" style="margin-top: 25px;">
-                                        <a class="text-secondary"> <small><i class="fas fa-cart-plus"></i> Agregar </small></a>
+                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                    <div class="text-end" style="margin-top: 11%;">
+                                        <a class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
+                                            <small>
+                                                <div class="icon-shape icon-xs icon-shape-secondary rounded">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </div>
+                                            </small>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -65,9 +77,15 @@
                             <div class="col-md-6">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    <div class="text-end" style="margin-top: 25px;">
-                                        <a class="text-secondary"> <small><i class="fas fa-cart-plus"></i> Agregar </small></a>
+                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                    <div class="text-end" style="margin-top: 11%;">
+                                        <a class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
+                                            <small>
+                                                <div class="icon-shape icon-xs icon-shape-secondary rounded">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </div>
+                                            </small>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -82,19 +100,31 @@
                         <div class="card-header border-0 text-center">
                             <h2 class="h3">Selecciona tu producto</h2>
                         </div>
-                        <div class="card-body">
-                            <!-- Choice Select -->
-                            <label class="my-1 me-2" for="state">Select state:</label>
-                            <select id="products" class="w-100" name="state">
-                                <option value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="CA">California</option>
-                                <option value="CO">Colorado</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                            </select>
+                        <div class="card-body row">
+                            <div wire:ignore class="col-11">
+                                <!-- Choice Select -->
+                                <select wire:model="select" id="products" class="w-100" name="select">
+                                    @if ($products->count())
+                                    <option value="" selected disabled>Elegir producto</option>
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->id }}">{{ strtoupper($product->name)." - ".$product->reference }} </option>
+                                        @endforeach
+                                    @else
+                                        <option value="">No hay produtos</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-1">
+                                <div class="text-end" style="margin-top: 11%;">
+                                    <a wire:click="addProduct" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
+                                        <small>
+                                            <div class="icon-shape icon-xs icon-shape-secondary rounded">
+                                                <i class="fas fa-cart-plus"></i>
+                                            </div>
+                                        </small>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,36 +142,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td >
-                                    <div class="input-group">
-                                        <input type="text" class="form-control product_title" placeholder="Selecciona un producto...">
-                                        <button class="btn btn-pill btn-outline-gray-500 select_product" type="button" data-value="row1"><i class="fas fa-search" aria-hidden="true"></i></button>
-                                      </div>
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" placeholder="No.">
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-dollar-sign"></i>
-                                        </span>
-                                        <input class="form-control datepicker-input">
+                            @if ($orders_products->count())
+                                @foreach($orders_products as $key => $data_product)
+                                <tr class="text-center">
+                                    <td style="width: 25%;">
+                                        {{ $data_product['name'] }}
+                                    </td>
+                                    <td>
+                                        <input  wire:model="amount.{{ $key }} ( {{ $data_product['price'] }}) "  class="form-control" type="number" placeholder="No.">
+                                    </td>
+                                    <td class="text-end">
+                                        <p>
+                                            <i class="fas fa-dollar-sign"></i> {{ number_format($data_product['price'],'2','.',',') }}
+                                        </p>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <p> 
+                                                    <i class="fas fa-dollar-sign"></i> 
+                                                    <span wire:model.defer="total{{ $key }}">
+                                                        0,00
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div wire:click="removeProduct({{$key}})" class="col-2">
+                                                <a class="item-delete text-danger"><i class="fas fa-trash-alt"></i></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @else
+                                <td colspan="4">
+                                    <div class="d-flex justify-content-center py-6">
+                                        <span class="text-gray-500"><i class="fas fa-archive"></i>  Aca mostraremos tus productos </span>
                                     </div>
                                 </td>
-                                <td class="text-end">
-                                    <p id="total">
-                                    <i class="fas fa-dollar-sign"></i> 0,00
-                                        <span class="hide"></span>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr class="text-center">
-                                <td colspan="4">
-                                    <a class="text-secondary" id="duplicate"> <i class="fas fa-cart-plus"></i> Agregar Producto </a>
-                                </td>
-                            </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
