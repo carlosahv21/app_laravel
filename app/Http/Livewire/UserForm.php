@@ -8,16 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserForm extends Component
 {
-    public $first_name;
-    public $last_name;
-    public $email;
-    public $phone;
-    public $address;
-    public $neighborhood;
-    public $location;
-    public $role;
-    public $identificacion;
-    public $modelId;
+    public $first_name, $last_name, $email, $phone, $address, $neighborhood, $location, $role, $identificacion, $modelId;
     
     protected $listeners = [
         'getModelId',

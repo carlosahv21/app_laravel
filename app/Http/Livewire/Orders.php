@@ -6,118 +6,115 @@ use Livewire\Component;
 use App\Models\Order;
 use Livewire\WithPagination;
 use App\Models\Product;
+use Cart;
 
 class Orders extends Component
 {
     use WithPagination;
-    public $item, $action, $search, $countOrders, $select, $amount = '';
-    public $selected = [];
-    public $total = [];
+    public $search = '';
+    public $comment, $radioButtom;
 
-    public $orders_products = [];
-    
-
-    protected $paginationTheme = 'bootstrap';
     protected $listeners = [
         'refreshParent' => '$refresh'
     ];
 
-    public function updatedSelect($value)
-    {
-        $select = $value;
+    public function rules() {
+        return [
+            'radioButtom' => 'required'
+        ];
     }
 
-    public function selectItem($item, $action)
+    protected $messages = [
+        'radioButtom' => 'Select at least one delivery.'
+    ];
+
+    public function addProduct($id, $name, $price, $reference)
+    {        
+        Cart::instance('cart')->add($id, $name, 1, $price, ['reference' => $reference])->associate('App\Model\Product');
+        $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Producto agregado a tu pedido!']);
+    }
+
+    public function removeProduct($rowId)
     {
-        $this->item = $item;
-        
-        if($action == 'delete'){
-            $this->dispatchBrowserEvent('openModal', ['name' => 'deleteOrder']);
-        }else if($action == 'masiveDelete'){
-            $this->dispatchBrowserEvent('openModal', ['name' => 'deleteOrderMasive']);
-            $this->countOrders = count($this->selected);
-        }else{
-            $this->dispatchBrowserEvent('openModal', ['name' => 'createOrder']);
-            $this->emit('getModelId', $this->item);
+        Cart::instance('cart')->remove($rowId);
+        $this->dispatchBrowserEvent('notify', ['type' => 'danger', 'message' => 'Producto eliminado de tu pedido!']);
+    }
+
+    public function increaseQuantity($rowId)
+    {
+        $product = Cart::instance('cart')->get($rowId);
+        $qty = $product->qty + 1;
+        Cart::instance('cart')->update($rowId,$qty);
+    }
+
+    public function decreaseQuantity($rowId)
+    {
+        $product = Cart::instance('cart')->get($rowId);
+        $qty = $product->qty - 1;
+        Cart::instance('cart')->update($rowId,$qty);
+
+        if($qty == 0){
+            $this->dispatchBrowserEvent('notify', ['type' => 'danger', 'message' => 'Producto eliminado de tu pedido!']);
         }
-    }
-
-    public function massiveDelete()
-    {
-        $orders = Order::whereKey($this->selected);
-        $orders->delete();
-        $this->selected = null;
-
-        $this->dispatchBrowserEvent('closeModal', ['name' => 'deleteOrderMasive']);
-
-    }
-
-    public function delete()
-    {
-        $user = Order::findOrFail($this->item);
-        $user->delete();
-
-        $this->dispatchBrowserEvent('closeModal', ['name' => 'deleteOrder']);
-
-    }
-
-    public function addProduct()
-    {
-        $product = Product::find($this->select);
-
-        foreach ($product as $key => $value) {
-            $name = $value->name;
-            $price = $value->price;
-        }        
-
-        $this->orders_products->push(
-            [
-                'name' => $name,
-                'price' => $price,
-            ]
-        );
-    }
-
-    public function removeProduct($key)
-    {
-        $this->orders_products->pull($key);
-    }
-
-    public function updatedAmount($qty, $amount)
-    {
-
-        $data = explode("(", $amount);
-
-        $key = $data[0];
-        $price = substr($data[1], 0, -2);
-
-        // dd($key." - ".$price);
-
-        $this->total[$key] = $price;
-    }
-
-    public function recalc($qty)
-    {
-        dd($qty);
     }
 
     public function mount()
     {
-        $this->fill([
-            'orders_products' => collect(array()),
-        ]);
+        Cart::instance('cart')->destroy();
     }
 
-    public function add(){
-        return view('livewire.orders');
+    public function cancel(){
+        
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'resumeOrder']);
+
+        $this->dispatchBrowserEvent('openModal', ['name' => 'cancelOrder']);
+    }
+
+    public function accept(){
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'cancelOrder']);
+        return redirect()->route('dashboard');
+    }
+
+    public function resume(){
+        $this->validate();
+        $this->dispatchBrowserEvent('openModal', ['name' => 'resumeOrder']);
+    }
+
+    public function save(){
+        $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
+
+        if($result->count()){
+            $code = $result->first()->code + 1;
+        }else{
+            $code = '000001';
+        }
+        
+        $order = new Order;
+        $order->code = $code;
+        $order->subtotal = Cart::instance('cart')->subtotal();
+        $order->tax = 0;
+        $order->total = Cart::instance('cart')->total();
+        $order->state = 'Creado';
+        $order->user_id = auth()->user()->id;
+
+        $order->save();
+
+        foreach(Cart::instance('cart')->content() as $items ){
+            $order->products()->attach($items->id, ['qty' => $items->qty]);
+        }
+
+        Cart::instance('cart')->destroy();
+
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'resumeOrder']);
+
+        $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
+
     }
 
     public function render()
     {
-        
         return view('livewire.orders',
-            ['products' => Product::search('name', $this->search)->paginate(10)]
-        );
-        
+            ['products' => Product::search('name', $this->search)->paginate(6)]
+        );   
     }
 }

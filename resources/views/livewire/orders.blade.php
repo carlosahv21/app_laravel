@@ -18,178 +18,128 @@
     </div>
 
     <div>
-        <form>
-            <div class="row">
-                <div class="col-4">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-6">
-                                <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <small class="text-muted">Last updated 3 mins ago</small>
-                                    <div class="text-end" style="margin-top: 11%;">
-                                        <a class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
-                                            <small>
-                                                <div class="icon-shape icon-xs icon-shape-secondary rounded">
-                                                    <i class="fas fa-cart-plus"></i>
-                                                </div>
-                                            </small>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-6">
-                                <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <small class="text-muted">Last updated 3 mins ago</small>
-                                    <div class="text-end" style="margin-top: 11%;">
-                                        <a class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
-                                            <small>
-                                                <div class="icon-shape icon-xs icon-shape-secondary rounded">
-                                                    <i class="fas fa-cart-plus"></i>
-                                                </div>
-                                            </small>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-6">
-                                <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <small class="text-muted">Last updated 3 mins ago</small>
-                                    <div class="text-end" style="margin-top: 11%;">
-                                        <a class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
-                                            <small>
-                                                <div class="icon-shape icon-xs icon-shape-secondary rounded">
-                                                    <i class="fas fa-cart-plus"></i>
-                                                </div>
-                                            </small>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+
+        <div class="card border-0 shadow my-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
+                    <div wire:ignore class="card-body row">
+                        <div class="input-group me-2 me-lg-3">
+                            <span class="input-group-text">
+                                <span class="fas fa-search"></span>
+                            </span>
+                            <input wire:model="search" type="text" class="form-control" placeholder="Busca un producto">
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="card border-0 shadow my-4">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10 col-xl-8 col-xxl-6">
-                        <div class="card-header border-0 text-center">
-                            <h2 class="h3">Selecciona tu producto</h2>
-                        </div>
-                        <div class="card-body row">
-                            <div wire:ignore class="col-11">
-                                <!-- Choice Select -->
-                                <select wire:model="select" id="products" class="w-100" name="select">
-                                    @if ($products->count())
-                                    <option value="" selected disabled>Elegir producto</option>
-                                        @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">{{ strtoupper($product->name)." - ".$product->reference }} </option>
-                                        @endforeach
-                                    @else
-                                        <option value="">No hay produtos</option>
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="col-1">
-                                <div class="text-end" style="margin-top: 11%;">
-                                    <a wire:click="addProduct" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
-                                        <small>
-                                            <div class="icon-shape icon-xs icon-shape-secondary rounded">
-                                                <i class="fas fa-cart-plus"></i>
-                                            </div>
-                                        </small>
-                                    </a>
+        </div>
+        <div class="row">
+            @if ($products->count())
+                @foreach ($products as $product)
+                    <div class="col-4">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-6">
+                                    <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ strtoupper($product->name )}}</h5>
+                                        <small class="text-muted">Description</small>
+                                        <div wire:ignore class="text-end" style="margin-top: 11%;">
+                                            <a wire:click="addProduct({{ $product->id }},'{{ $product->name }}',{{ $product->price }}, '{{ $product->reference }}' )" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
+                                                <small>
+                                                    <div class="icon-shape icon-xs icon-shape-secondary rounded">
+                                                        <i class="fas fa-cart-plus"></i>
+                                                    </div>
+                                                </small>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div class="col-12 my-4 text-center">
+                    <h5 class="text-gray-500"><i class="fas fa-exclamation-triangle"></i> No hay produtos para mostrar</h5>
                 </div>
-            </div>
+            @endif
+        </div>
 
-            <div class="card border-0 table-wrapper table-responsive">
-                <div>
-                    <table class="table product-table align-items-center" id='table-data'>
-                        <thead class="thead-dark">
-                            <tr class="text-center">
-                                <th style="width: 25%;">Producto</th>
-                                <th style="width: 10%">Cantidad</th>
-                                <th style="width: 10%">Precio</th>
-                                <th style="width: 10%">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($orders_products->count())
-                                @foreach($orders_products as $key => $data_product)
-                                <tr class="text-center">
-                                    <td style="width: 25%;">
-                                        {{ $data_product['name'] }}
+        <div class="card border-0 table-wrapper table-responsive">
+            <div>
+                <table class="table product-table align-items-center" id='table-data'>
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th style="width: 20%;">Producto</th>
+                            <th style="width: 10%">Cantidad</th>
+                            <th style="width: 10%">Precio</th>
+                            <th style="width: 10%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(Cart::instance('cart')->count() > 0)
+                            @foreach (Cart::instance('cart')->content() as $item )
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="d-block">
+                                            <span class="fw-bold">{{ strtoupper($item->name) }}</span>
+                                            <div class="small text-gray">{{ $item->options->reference }} </div>
+                                        </div>
+                                        
                                     </td>
                                     <td>
-                                        <input  wire:model="amount.{{ $key }} ( {{ $data_product['price'] }}) "  class="form-control" type="number" placeholder="No.">
+                                        <div class="input-group mb-3">
+                                            <button wire:click.ignore="decreaseQuantity('{{$item->rowId}}')" class="btn btn-outline-secondary" type="button"> <i class="fa fa-minus" aria-hidden="true"></i> </button>
+
+                                            <input type="text" class="form-control" value="{{$item->qty}}" readonly>
+
+                                            <button wire:click.ignore="increaseQuantity('{{$item->rowId}}')" class="btn btn-outline-secondary" type="button"> <i class="fa fa-plus" aria-hidden="true"></i> </button>
+                                        </div>
                                     </td>
-                                    <td class="text-end">
-                                        <p>
-                                            <i class="fas fa-dollar-sign"></i> {{ number_format($data_product['price'],'2','.',',') }}
+                                    <td class="text-center">
+                                        <p> 
+                                            <i class="fas fa-dollar-sign"></i>  {{ number_format($item->price,'2',',','.') }}
                                         </p>
                                     </td>
-                                    <td class="text-end">
+                                    <td>
                                         <div class="row">
-                                            <div class="col-10">
+                                            <div class="col-10 text-center">
                                                 <p> 
                                                     <i class="fas fa-dollar-sign"></i> 
-                                                    <span wire:model.defer="total{{ $key }}">
-                                                        0,00
+                                                    <span>
+                                                        {{ number_format($item->subtotal,'2',',','.') }}
                                                     </span>
                                                 </p>
                                             </div>
-                                            <div wire:click="removeProduct({{$key}})" class="col-2">
+                                            <div wire:click.prevent="removeProduct('{{$item->rowId}}')" class="col-2">
                                                 <a class="item-delete text-danger"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </div>
+
                                     </td>
                                 </tr>
-                                @endforeach
-                            @else
-                                <td colspan="4">
-                                    <div class="d-flex justify-content-center py-6">
-                                        <span class="text-gray-500"><i class="fas fa-archive"></i>  Aca mostraremos tus productos </span>
-                                    </div>
-                                </td>
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
+                            @endforeach
+                        @else
+                        <td colspan="4">
+                                <div class="d-flex justify-content-center py-6">
+                                    <span class="text-gray-500"><i class="fas fa-archive"></i> Aca mostraremos tus productos </span>
+                                </div>
+                            </td>
+                        @endif
+                    </tbody>
+                </table>
             </div>
+        </div>
 
+        @if(Cart::instance('cart')->count() > 0)
             <div class="card border-0 shadow components-section my-4">
                 <div class="row">
                     <div class="col-6 my-4 mx-4">
                         <label for="textarea">Comentarios</label>
-                        <textarea class="form-control textarea" placeholder="Cuéntanos si tienes alguna sugerencias o recomendación especial." id="textarea" rows="4"></textarea>
+                        <textarea class="form-control textarea" placeholder="Cuéntanos si tienes alguna sugerencias o recomendación especial." rows="4"></textarea>
                     </div>
                     <div class="col-1"></div>
                     <div class="col-4 d-flex justify-content-end mb-4 py-4">
@@ -200,26 +150,16 @@
                                         <td class="left">
                                             <strong>Subtotal</strong>
                                         </td>
-                                        <td class="right">$8.497,00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="left">
-                                            <strong>Discount (20%)</strong>
+                                        <td class="right">
+                                            <i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->subtotal(),'2',',','.') }}
                                         </td>
-                                        <td class="right">$1,699,40</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="left">
-                                            <strong>VAT (10%)</strong>
-                                        </td>
-                                        <td class="right">$679,76</td>
                                     </tr>
                                     <tr>
                                         <td class="left">
                                             <strong>Total</strong>
                                         </td>
                                         <td class="right">
-                                            <strong>$7.477,36</strong>
+                                            <strong><i class="fas fa-dollar-sign"></i> {{number_format( Cart::instance('cart')->total(),'2',',','.') }}</strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -228,20 +168,24 @@
                                                 <p>¿Aceptarías recibir una entrega parcial de tu pedido?</p>
                                                 <div class="row text-center">
                                                     <div class="col-6">
-                                                        
-                                                        <input class="form-check-input" type="radio" name="delivery" id="exampleRadios1" value="Obvio" > Obvio microbio                
+                                                        <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="obvio" > Obvio microbio                
                                                     </div>
                                                     <div class="col-6">
-                                                        <input class="form-check-input" type="radio" name="delivery" id="exampleRadios1" value="Pailas" > Pailas
+                                                        <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="pailas" > Pailas
                                                     </div>
                                                 </div>
+                                                @error($radioButtom) 
+                                                <div class="invalid-feedback text-center">
+                                                    {{ $message }}
+                                                </div>    
+                                            @enderror
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="text-end" colspan="2">
-                                            <button type="button" class="btn btn-link text-gray-600">Cancelar</button>
-                                            <button class="btn btn-secondary" >Hacer pedido</button>
+                                            <button wire:click="cancel" type="button" class="btn btn-link text-gray-600">Cancelar</button>
+                                            <button wire:click="resume" class="btn btn-secondary" >Hacer pedido</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -249,8 +193,103 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </div>  
+        @endif
     </div>
 <div>
+<!-- Modal Cancel-->
+<div wire:ignore.self class="modal fade" id="cancelOrder" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                ¡Estas a punto de cancelar tu pedido! ¿estas seguro?
+            </div>
+            <div class="modal-footer">
+                <button wire:click="accept" type="button" class="btn btn-secondary">Aceptar</button>
+                <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Resume-->
+<div wire:ignore.self class="modal fade" id="resumeOrder" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Resumen de tu pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+            <div class="modal-body text-center">
+                <table class="table table-centered table-nowrap mb-0 rounded">
+                    <thead class="thead-light">
+                        <tr class="text-center">
+                            <th style="width: 20%;">Producto</th>
+                            <th style="width: 10%">Cantidad</th>
+                            <th style="width: 10%">Precio</th>
+                            <th style="width: 10%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Cart::instance('cart')->content() as $item )
+                            <tr>
+                                <td class="text-center">
+                                    <div class="d-block">
+                                        <span class="fw-bold">{{ strtoupper($item->name) }}</span>
+                                        <div class="small text-gray">{{ $item->options->reference }} </div>
+                                    </div>
+                                    
+                                </td>
+                                <td>
+                                    <p> 
+                                        <span class="fw-bold">{{$item->qty}}</span>
+                                    </p>
+                                </td>
+                                <td class="text-center">
+                                    <p> 
+                                        <i class="fas fa-dollar-sign"></i>  {{ number_format($item->price,'2',',','.') }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p> 
+                                        <i class="fas fa-dollar-sign"></i> {{ number_format($item->subtotal,'2',',','.') }}
+
+                                    </p>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end text-right">
+                    <div class="mt-4">
+                        <table class="table table-clear">
+                            <tbody>
+                                <tr>
+                                    <td class="left">
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td class="right">
+                                        <i class="fas fa-dollar-sign"></i> {{Cart::instance('cart')->subtotal()}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="left">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="right">
+                                        <strong><i class="fas fa-dollar-sign"></i> {{Cart::instance('cart')->total()}}</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button wire:click="save" type="button" class="btn btn-secondary">Aceptar</button>
+                <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @include('livewire.form_orders')

@@ -17,11 +17,11 @@ class CreateOrderProductTable extends Migration
             $table->id();
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('product_id');
+            $table->integer('qty');
 
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');
 
-            $table->timestamps();
         });
     }
 
