@@ -25,7 +25,7 @@ class Orders extends Component
     }
 
     protected $messages = [
-        'radioButtom' => 'Select at least one delivery.'
+        'radioButtom.required' => 'Select at least one delivery.'
     ];
 
     public function addProduct($id, $name, $price, $reference)
