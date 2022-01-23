@@ -81,7 +81,6 @@ class Orders extends Component
     }
 
     public function save(){
-        dd($this->date_order);
         $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
 
         if($result->count()){
