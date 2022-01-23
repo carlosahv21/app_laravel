@@ -86,9 +86,17 @@ d.addEventListener("DOMContentLoaded", function(event) {
 
     // Datepicker
     var datepickers = [].slice.call(d.querySelectorAll('[data-datepicker]'))
+
     var datepickersList = datepickers.map(function (el) {
         return new Datepicker(el, {
-            buttonClass: 'btn'
+            buttonClass: 'btn',
+            autohide: true,
+            minDate : 'today',
+            defaultViewDate : 'today',
+            language : 'es',
+            format : 'dd/mm/yyyy',
+            prevArrow : '<',
+            nextArrow : '>',
           });
     })
 

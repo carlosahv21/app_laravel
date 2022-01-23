@@ -112,7 +112,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-end py-4">
-                {{ $order->links()}}
+                {{ $orders->links()}}
             </div>
         @else
             <div class="d-flex justify-content-center py-6">

@@ -20,18 +20,16 @@
                 </div>
             @enderror
         </div>
-        @if($key > 0)
         <div class="col-1">
             <div wire:click="removeInput({{$key}})" class="flex items-center justify-end text-red-600 text-sm w-full cursor-pointer" style="top: 55%;position: relative;">
                 <a class="item-delete text-danger"><i class="fas fa-trash-alt"></i></a>
             </div>
         </div>
-        @endif
     </div>
     @endforeach
 
     <div class="flex text-center justify-center py-4">
-        <a wire:click="addInput" class="text-secondary"> <i class="fas fa-cart-plus"></i> Agregar Invitado </a>
+        <a wire:click="addInput" class="text-secondary"> <i class="fas fa-cart-plus"></i> Agregar otro amigo </a>
     </div>
     <div class="row">
         <span class="small text-secondary mt-3" style="font-size: 0.75em;"> * Recuerda avisarle a tus amig@s que los vamos a contactar, no queremos incomodarl@s. Entre más referidos nos des, más beneficios recibes.</span>

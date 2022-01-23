@@ -133,68 +133,82 @@
                 </table>
             </div>
         </div>
-
-        @if(Cart::instance('cart')->count() > 0)
-            <div class="card border-0 shadow components-section my-4">
-                <div class="row">
-                    <div class="col-6 my-4 mx-4">
+        <div class="card border-0 shadow components-section my-4">
+            <div class="row">
+                <div class="col-6 my-4 mx-4">
+                    <div class="mt-2">
                         <label for="textarea">Comentarios</label>
                         <textarea class="form-control textarea" placeholder="Cuéntanos si tienes alguna sugerencias o recomendación especial." rows="4"></textarea>
                     </div>
-                    <div class="col-1"></div>
-                    <div class="col-4 d-flex justify-content-end mb-4 py-4">
-                        <div class="mt-4">
-                            <table class="table table-clear">
-                                <tbody>
-                                    <tr>
-                                        <td class="left">
-                                            <strong>Subtotal</strong>
-                                        </td>
-                                        <td class="right">
-                                            <i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->subtotal(),'2',',','.') }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="left">
-                                            <strong>Total</strong>
-                                        </td>
-                                        <td class="right">
-                                            <strong><i class="fas fa-dollar-sign"></i> {{number_format( Cart::instance('cart')->total(),'2',',','.') }}</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="right" colspan="2">
-                                            <div class="mt-2">
-                                                <p>¿Aceptarías recibir una entrega parcial de tu pedido?</p>
-                                                <div class="row text-center">
-                                                    <div class="col-6">
-                                                        <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="obvio" > Obvio microbio                
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="pailas" > Pailas
-                                                    </div>
-                                                </div>
-                                                @error($radioButtom) 
-                                                <div class="invalid-feedback text-center">
-                                                    {{ $message }}
-                                                </div>    
-                                            @enderror
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end" colspan="2">
-                                            <button wire:click="cancel" type="button" class="btn btn-link text-gray-600">Cancelar</button>
-                                            <button wire:click="resume" class="btn btn-secondary" >Hacer pedido</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="mt-4 row">
+                        <div class="col-6">
+                            <label for="textarea">Fecha de entrega</label>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </span>
+                                    <input wire:ignore id="date_order" autocomplete="off" data-datepicker="" class="form-control" type="text" placeholder="dd/mm/yyyy" required>                                               
+                                </div>                                            
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>  
-        @endif
+                <div class="col-1"></div>
+                <div class="col-4 d-flex justify-content-end mb-4 py-4">
+                    <div class="mt-4">
+                        <table class="table table-clear">
+                            <tbody>
+                                <tr>
+                                    <td class="left">
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td class="right">
+                                        <i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->subtotal(),'2',',','.') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="left">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="right">
+                                        <strong><i class="fas fa-dollar-sign"></i> {{number_format( Cart::instance('cart')->total(),'2',',','.') }}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="right" colspan="2">
+                                        <div class="mt-2">
+                                            <p>¿Aceptarías recibir una entrega parcial de tu pedido?</p>
+                                            <div class="row text-center">
+                                                <div class="col-6">
+                                                    <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="obvio" > Obvio microbio                
+                                                </div>
+                                                <div class="col-6">
+                                                    <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="pailas" > Pailas
+                                                </div>
+                                            </div>
+                                            @error($radioButtom) 
+                                            <div class="invalid-feedback text-center">
+                                                {{ $message }}
+                                            </div>    
+                                        @enderror
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end" colspan="2">
+                                        <button wire:click="cancel" type="button" class="btn btn-link text-gray-600">Cancelar</button>
+                                        <button wire:click="resume" class="btn btn-secondary" >Hacer pedido</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>  
     </div>
 <div>
 <!-- Modal Cancel-->

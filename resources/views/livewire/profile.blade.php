@@ -56,6 +56,7 @@
                                     {{ $errors->first('user.address') }}
                                 </div>
                             @endif
+                            <label class="form-text text-secondary">Especificar Interior, Torre, etc.</label>
                         </div>
                         <div class="col-6 p-2">
                             <label for="inputBarrio" class="form-label">Barrio </label>
@@ -78,7 +79,7 @@
                         @if (auth()->user()->role == 'admin')
                             <div class="col-6 p-2">
                                 <label for="inputTipo" class="form-label">Rol <span class="text-danger"> *</span></label>
-                                <select wire:model="role" class="form-select" id="inputTipo">
+                                <select wire:ignore.model="role" class="form-select" id="inputTipo">
                                     <option value="admin">Admin</option>
                                     <option value="client">Cliente</option>
                                     <option value="domiciliary">Domiciliario</option>

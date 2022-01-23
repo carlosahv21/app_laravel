@@ -79,7 +79,7 @@
                             <th>Referencia</th>
                             <th>Presentación</th>
                             <th>Precio</th>
-                            <th>Imagen</th>
+                            <th>Stock</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -97,13 +97,7 @@
                                 <th>{{ $product->reference }}</th>
                                 <th>{{ $product->presentation }}</th>
                                 <th>{{ $product->price }}</th>
-                                <th> 
-                                    @if ($product->product_image )
-                                        {{-- Aqui iria la imagen --}}
-                                    @else
-                                        No posee imagen
-                                    @endif
-                                </th>
+                                <th>{{ $product->stock }}</th>
                                 <th style="width: 5%;">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-h"></i>

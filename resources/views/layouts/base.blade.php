@@ -98,7 +98,6 @@
         })
 
         window.addEventListener('notify', event => {
-            console.log('si');
             
             var backgroud = '';
             var icon = '';
@@ -157,78 +156,28 @@
                 window.location.href = "{{ route('orders')}}";
             });
 
-            // funcion para duplicar una fila
-            $('#duplicate').on('click', function(e) {
-                var $tr = $(this).closest('tr').siblings().first();
-                var allTrs = $tr.closest('table').find('tr');
-
-                var lastTr = allTrs[allTrs.length-1];
-                var $clone = $($tr).clone();
-
-                $clone.attr('id', '');
-                
-                // Agregar clase para poder obtener el padre al eliminar
-                $clone.addClass('itemDate');
-                $clone.find('input').each(function() {
-                    // Solo establecer el valor
-                    this.value = '';
-                    // Dejar el nombre con corchetes, para que sea un arreglo
-                });
-                // Agregar botón para eliminar
-                $($clone).find('.hide').append('<a class="item-delete text-danger"><i class="fas fa-trash-alt"></i></a>');
-
-                $($clone).insertAfter($tr);
-
+            $('#see-password').on('click',function (params) {
+                if($('#password').attr('type') == 'password'){
+                    $('#password').attr('type', 'text');
+                    $('#pass-icon').attr('class', 'fa fa-eye-slash');
+                }else{
+                    $('#password').attr('type', 'password');
+                    $('#pass-icon').attr('class', 'fa fa-eye');
+                }
             });
 
-            // Escuchar clic en botón Agregar
-            $('#item-add .button').on('click', add);
-
-            // Escuchar clic en botones para borrar
-            $(document.body).on('click', '.item-delete', removeThisFile);
-
-            // Check buton para perfil
-            $('input[name=confirm]').on('change', function(){
-                var confirm = $('input[name=confirm]:checked').val();
-                if(confirm == 'option1'){
-                    $('#method').hide();
+            $('#see-password-confirm').on('click',function (params) {
+                if($('#confirm-password').attr('type') == 'password'){
+                    $('#confirm-password').attr('type', 'text');
+                    $('#confirm-password-pass-icon').attr('class', 'fa fa-eye-slash');
                 }else{
-                    $('#method').show();
+                    $('#confirm-password').attr('type', 'password');
+                    $('#confirm-password-pass-icon').attr('class', 'fa fa-eye');
                 }
-            })
+            });
 
         });
 
-        function add(){
-            var $tr = $(this).closest('tr').siblings().first();
-            var allTrs = $tr.closest('table').find('tr');
-
-            var lastTr = allTrs[allTrs.length-1];
-            var $clone = $($tr).clone();
-            // Clonar contenedor, eliminar ID
-            let nuevo = $('#itemDate').clone();
-            clone.attr('id', '');
-            
-            // Agregar clase para poder obtener el padre al eliminar
-            nuevo.addClass('itemDate');
-            nuevo.find('input').each(function() {
-                // Solo establecer el valor
-                this.value = '';
-                // Dejar el nombre con corchetes, para que sea un arreglo
-            });
-            // Agregar botón para eliminar
-            $(nuevo).append(' <button class="item-delete">X</button>');
-            // Insertar nuevo contenedor antes del botón "Agregar"
-            $(nuevo).insertBefore('#item-add');
-        }
-
-        // Función para eliminar
-        function removeThisFile(ele) {
-            // $(this) es el elemento que disparó el evento
-            // ele no es el elemento, sino el evento
-            // Obtener padre por clase, usando closest()
-            $(this).closest('.itemDate').remove();
-        }
     </script>
 </body>
 

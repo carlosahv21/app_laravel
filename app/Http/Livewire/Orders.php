@@ -12,7 +12,7 @@ class Orders extends Component
 {
     use WithPagination;
     public $search = '';
-    public $comment, $radioButtom;
+    public $comment, $radioButtom, $date_order;
 
     protected $listeners = [
         'refreshParent' => '$refresh'
@@ -81,6 +81,7 @@ class Orders extends Component
     }
 
     public function save(){
+        dd($this->date_order);
         $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
 
         if($result->count()){
