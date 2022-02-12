@@ -21,6 +21,8 @@ class CreateOrdersTable extends Migration
             $table->decimal('total',10,2)->nullable();
             $table->string('state')->nullable();
             $table->integer('user_id')->unsigned()->references('id')->on('users');
+            $table->date('date_order')->nullable();
+            $table->string('partial_delivery')->nullable();
             $table->timestamps();
         });
     }

@@ -47,8 +47,10 @@ class ListOrders extends Component
 
     public function delete()
     {
-        $user = Order::findOrFail($this->item);
-        $user->delete();
+        $order = Order::findOrFail($this->item);
+
+        $order->products()->delete();
+        $order->delete();
 
         $this->dispatchBrowserEvent('closeModal', ['name' => 'deleteOrder']);
 

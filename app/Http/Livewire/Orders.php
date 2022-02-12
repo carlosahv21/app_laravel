@@ -76,8 +76,12 @@ class Orders extends Component
     }
 
     public function resume(){
-        $this->validate();
-        $this->dispatchBrowserEvent('openModal', ['name' => 'resumeOrder']);
+        if(Cart::instance('cart')->count() > 0){
+            $this->validate();
+            $this->dispatchBrowserEvent('openModal', ['name' => 'resumeOrder']);
+        }else{
+            $this->dispatchBrowserEvent('notify', ['type' => 'danger', 'message' => 'Al menos debes agregar un producto a tu pedido!']);
+        }
     }
 
     public function save(){
@@ -86,7 +90,7 @@ class Orders extends Component
         if($result->count()){
             $code = $result->first()->code + 1;
         }else{
-            $code = '000001';
+            $code = 000001;
         }
         
         $order = new Order;
@@ -94,6 +98,8 @@ class Orders extends Component
         $order->subtotal = Cart::instance('cart')->subtotal();
         $order->tax = 0;
         $order->total = Cart::instance('cart')->total();
+        $order->partial_delivery = $this->radioButtom;
+        $order->date_order = $this->date_order;
         $order->state = 'Creado';
         $order->user_id = auth()->user()->id;
 

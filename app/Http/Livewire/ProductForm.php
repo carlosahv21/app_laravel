@@ -63,6 +63,7 @@ class ProductForm extends Component
         $this->presentation = null;
         $this->price = null;
         $this->stock = null;
+        $this->modelId = null;
 
     }
 
@@ -81,7 +82,7 @@ class ProductForm extends Component
             'name' => 'required|max:15',
             'reference' => 'required',
             'presentation' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'stock' => 'required|numeric|gt:0',
         ];
     }

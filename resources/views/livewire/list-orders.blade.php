@@ -66,9 +66,10 @@
                                     </label>
                                 </div>
                             </th>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                            <th>Direccion</th>
+                            <th>Referencia del pedido</th>
+                            <th>Total</th>
+                            <th>Fecha de Entrega</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -83,17 +84,11 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="#" class="d-flex align-items-center">
-                                        <img src="../assets/img/team/profile-picture-1.jpg" class="avatar rounded-circle me-3"
-                                            alt="Avatar">
-                                        <div class="d-block">
-                                            <span class="fw-bold">{{ $order->first_name . " ". $order->last_name }}</span>
-                                            <div class="small text-gray">{{ $order->email }}</div>
-                                        </div>
-                                    </a>
+                                    {{ $order->code }}
                                 </td>
-                                <th>{{ $order->role }}</th>
-                                <th>{{ $order->address }}</th>
+                                <th> <i class="fas fa-dollar-sign"></i> {{ number_format($order->total,'2',',','.')  }}</th>
+                                <th>{{ $order->date_order }}</th>
+                                <th>{{ $order->state }}</th>
                                 <th style="width: 5%;">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-h"></i>

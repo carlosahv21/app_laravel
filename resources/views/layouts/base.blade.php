@@ -7,8 +7,7 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <!-- Datepicker -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
     <!-- Fontawesome -->
     <link type="text/css" href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -50,9 +49,6 @@
     <script src="/assets/js/chartist.min.js"></script>
     <script src="/assets/js/chartist-plugin-tooltip.min.js"></script>
 
-    <!-- Datepicker -->
-    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker.min.js"></script>
-
     <!-- DataTables -->
     <script src="/assets/js/simple-datatables.js"></script>
 
@@ -72,7 +68,10 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="UTF-8"></script>
+
+    <!-- Datepicker -->
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
     
     <!-- Volt JS -->
     <script src="/assets/js/volt.js"></script>
@@ -145,6 +144,12 @@
         $(document).ready(function(){
 
             var modals = ['createUser', 'createProduct'];
+            let inputsHidden = [ 'inputCelular', 'inputDireccion', 'inputBarrio', 'inputLocalidad', 'inputIdentificacion', 'inputPlaca' ];
+
+            // Inputs hidden
+            $.each(inputsHidden, function (idx, nameInputsHidden) {
+                $( '#' + nameInputsHidden ).closest( 'div' ).hide();
+            })
 
             modals.forEach(element => {
                 $("#"+element).on('hidden.bs.modal', function(){
@@ -176,7 +181,54 @@
                 }
             });
 
+            $(".datepicker").on("change",function(){
+                let date = $(this).data('date-order');
+                eval(date).set('date_order', $("#date_order").val());
+            });
+
+            $("#roleTipo").on("change",function(){
+                    // var inputs = [];
+                var type = $(this).val() ;
+
+                var clientsInputs = [ "inputCelular", "inputDireccion", "inputBarrio", "inputLocalidad", "inputIdentificacion" ];
+                var domiciliaryInpus = [ "inputPlaca" ];
+
+                if(type == 'client') {
+                    // Hidden inputs to clients
+                    hiddenInputs(domiciliaryInpus);
+
+                    // Show inputs to domiciliary
+                    showInputs(clientsInputs);
+
+                }else if(type == 'domiciliary'){
+                    // Hidden inputs to domiciliary
+                    hiddenInputs(clientsInputs);
+
+                    // Show inputs to clients
+                    showInputs(domiciliaryInpus);
+                }else{
+                    // Hidden inputs to domiciliary
+                    // Hidden inputs to clients
+                    hiddenInputs(clientsInputs);
+                    hiddenInputs(domiciliaryInpus);
+                }
+            });
+
         });
+
+        function showInputs(arrayInputs) {
+            $.each(arrayInputs , function( ind, nameInputs ) {
+                $( '#' + nameInputs ).closest( 'div' ).show();
+            });
+
+        }
+
+        function hiddenInputs(arrayInputs) {
+            $.each(arrayInputs , function( ind, nameInputs ) {
+                $( '#' + nameInputs ).closest( 'div' ).hide();
+            });
+
+        }
 
     </script>
 </body>

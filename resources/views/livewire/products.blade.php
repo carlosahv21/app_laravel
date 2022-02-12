@@ -96,7 +96,7 @@
                                 <th>{{ strtoupper($product->name) }}</th>
                                 <th>{{ $product->reference }}</th>
                                 <th>{{ $product->presentation }}</th>
-                                <th>{{ $product->price }}</th>
+                                <th> <i class="fas fa-dollar-sign"></i> {{ number_format($product->price,'2',',','.')  }}</th>
                                 <th>{{ $product->stock }}</th>
                                 <th style="width: 5%;">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -14,7 +14,7 @@ class Guests extends Component
 
     protected $rules = [
         'inputs.*.guest_name' => 'required',
-        'inputs.*.guest_phone' => 'required|numeric|max:10',
+        'inputs.*.guest_phone' => 'required|numeric|min:10',
     ];
 
     protected $messages = [

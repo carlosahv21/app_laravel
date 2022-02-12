@@ -146,11 +146,11 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                <div class="input-group">
+                                <div class="input-group" wire:ignore.defer="date_order">
                                     <span class="input-group-text">
                                         <i class="fas fa-calendar-day"></i>
                                     </span>
-                                    <input wire:ignore id="date_order" autocomplete="off" data-datepicker="" class="form-control" type="text" placeholder="dd/mm/yyyy" required>                                               
+                                    <input data-date-order="@this" id="date_order" autocomplete="off" class="form-control datepicker" type="text" placeholder="dd/mm/yyyy">                                               
                                 </div>                                            
                             </div>
                         </div>
@@ -282,7 +282,7 @@
                                         <strong>Subtotal</strong>
                                     </td>
                                     <td class="right">
-                                        <i class="fas fa-dollar-sign"></i> {{Cart::instance('cart')->subtotal()}}
+                                        <i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->subtotal(),'2',',','.') }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -290,7 +290,7 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td class="right">
-                                        <strong><i class="fas fa-dollar-sign"></i> {{Cart::instance('cart')->total()}}</strong>
+                                        <strong><i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->total(),'2',',','.') }}</strong>
                                     </td>
                                 </tr>
                             </tbody>

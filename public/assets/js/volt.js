@@ -85,20 +85,26 @@ d.addEventListener("DOMContentLoaded", function(event) {
     
 
     // Datepicker
-    var datepickers = [].slice.call(d.querySelectorAll('[data-datepicker]'))
+    // var datepickers = [].slice.call(d.querySelectorAll('[data-datepicker]'))
 
-    var datepickersList = datepickers.map(function (el) {
-        return new Datepicker(el, {
-            buttonClass: 'btn',
-            autohide: true,
-            minDate : 'today',
-            defaultViewDate : 'today',
-            language : 'es',
-            format : 'dd/mm/yyyy',
-            prevArrow : '<',
-            nextArrow : '>',
-          });
-    })
+    // var datepickersList = datepickers.map(function (el) {
+    //     return new Datepicker(el, {
+    //         buttonClass: 'btn',
+    //         autohide: true,
+    //         minDate : 'today',
+    //         defaultViewDate : 'today',
+    //         language : 'es',
+    //         format : 'dd/mm/yyyy',
+    //         prevArrow : '<',
+    //         nextArrow : '>',
+    //       });
+    // })
+
+    $('.datepicker').datepicker({
+        startDate: 'today',
+        autoclose: true,
+        format: 'yyyy-mm-dd'
+    });
 
     if(d.querySelector('.input-slider-container')) {
         [].slice.call(d.querySelectorAll('.input-slider-container')).map(function(el) {
