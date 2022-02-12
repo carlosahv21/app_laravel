@@ -7,13 +7,7 @@ use App\Models\Product;
 
 class ProductForm extends Component
 {
-    public $name;
-    public $reference;
-    public $presentation;
-    public $price;
-    public $stock;
-    public $product_image;
-    public $modelId;
+    public $name, $reference, $presentation, $price, $stock, $product_image, $modelId, $favorite;
     
     protected $listeners = [
         'getModelId',
@@ -46,7 +40,7 @@ class ProductForm extends Component
         $product->presentation = $this->presentation;
         $product->price = $this->price;
         $product->stock = $this->stock;
-
+        $product->favorite = ($this->favorite) ? 1 : 0;
 
         $this->validate();
         $product->save();

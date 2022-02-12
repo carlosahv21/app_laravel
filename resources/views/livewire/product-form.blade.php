@@ -48,6 +48,14 @@
                 </div>
             @endif
         </div>
+        <div class="col-12 p-2">
+            <div class="form-check">
+                <input wire:model="favorite" class="form-check-input" type="checkbox" value="" id="inputFavorite">
+                <label class="form-check-label" for="inputFavorite">
+                    Agregar a favorito
+                </label>
+            </div>
+        </div>
         <div class="d-flex justify-content-end py-4">
             <button wire:click="save" class="btn btn-secondary">Guardar</button>
             <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>

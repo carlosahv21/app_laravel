@@ -36,30 +36,36 @@
         <div class="row">
             @if ($products->count())
                 @foreach ($products as $product)
-                    <div class="col-4">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-6">
-                                    <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ strtoupper($product->name )}}</h5>
-                                        <small class="text-muted">Description</small>
-                                        <div wire:ignore class="text-end" style="margin-top: 11%;">
-                                            <a wire:click="addProduct({{ $product->id }},'{{ $product->name }}',{{ $product->price }}, '{{ $product->reference }}' )" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
-                                                <small>
-                                                    <div class="icon-shape icon-xs icon-shape-secondary rounded">
-                                                        <i class="fas fa-cart-plus"></i>
-                                                    </div>
-                                                </small>
-                                            </a>
+                    @if ($product->favorite)
+                        <div class="col-4">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-6">
+                                        <img src="../../assets/img/team/profile-picture-1.jpg" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ strtoupper($product->name )}}</h5>
+                                            <small class="text-muted">Description</small>
+                                            <div wire:ignore class="text-end" style="margin-top: 11%;">
+                                                <a wire:click="addProduct({{ $product->id }},'{{ $product->name }}',{{ $product->price }}, '{{ $product->reference }}' )" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar al pedido"> 
+                                                    <small>
+                                                        <div class="icon-shape icon-xs icon-shape-secondary rounded">
+                                                            <i class="fas fa-cart-plus"></i>
+                                                        </div>
+                                                    </small>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-12 my-4 text-center">
+                            <h5 class="text-gray-500"><i class="fas fa-exclamation-triangle"></i> No hay produtos favoritos</h5>
+                        </div>
+                    @endif                
                 @endforeach
             @else
                 <div class="col-12 my-4 text-center">

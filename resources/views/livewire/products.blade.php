@@ -105,6 +105,11 @@
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a wire:click="selectItem({{ $product->id }}, 'update')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
                                         @if ($product->role != 'admin')
+                                            @if ($product->favorite)
+                                                <li ><button wire:click="removeFavorite({{ $product->id }})" class="dropdown-item btn-outline-gray-500"><i class="far fa-star"></i> Remover favorito</button></li>
+                                            @else
+                                                <li ><button wire:click="addFavorite({{ $product->id }})" class="dropdown-item btn-outline-gray-500"><i class="fas fa-star"></i> Agregar favorito</button></li>
+                                            @endif
                                             <li ><button wire:click="selectItem({{ $product->id }}, 'delete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button></li>
                                         @endif
                                         </ul>

@@ -52,6 +52,20 @@ class Products extends Component
 
     }
 
+    public function addFavorite($item)
+    {
+        Product::where('id',$item)->update(['favorite' => 1]);
+        
+        $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Producto agregado a favoritos!']);
+    }
+
+    public function removeFavorite($item)
+    {
+        Product::where('id',$item)->update(['favorite' => 0]);
+
+        $this->dispatchBrowserEvent('notify', ['type' => 'danger', 'message' => 'Producto removido a favoritos!']);
+    }
+
     public function render()
     {
         return view('livewire.products', 
