@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Order;
 use Livewire\WithPagination;
 use App\Models\Product;
+use App\Mail\OrdersMail;
+use Illuminate\Support\Facades\Mail;
 use Cart;
 
 class Orders extends Component
@@ -85,16 +87,11 @@ class Orders extends Component
     }
 
     public function save(){
+
         $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
 
-        if($result->count()){
-            $code = $result->first()->code + 1;
-        }else{
-            $code = 000001;
-        }
-        
         $order = new Order;
-        $order->code = $code;
+        $order->code = ($result->count()) ? $result->first()->code + 1 : 1 ;
         $order->subtotal = Cart::instance('cart')->subtotal();
         $order->tax = 0;
         $order->total = Cart::instance('cart')->total();
@@ -105,6 +102,9 @@ class Orders extends Component
 
         $order->save();
 
+        $lastOrder = Order::latest()->first();
+        $this->sendEmail( $lastOrder );
+        
         foreach(Cart::instance('cart')->content() as $items ){
             $order->products()->attach($items->id, ['qty' => $items->qty]);
         }
@@ -115,6 +115,17 @@ class Orders extends Component
 
         $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
 
+    }
+
+    public function sendEmail( $lastOrder )
+    {
+
+        $mailData = [
+            'cart' => Cart::instance('cart'),
+            'model' => $lastOrder
+        ];
+
+        Mail::to( auth()->user()->email )->send( new OrdersMail($mailData) );
     }
 
     public function render()

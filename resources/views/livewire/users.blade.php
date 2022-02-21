@@ -180,3 +180,5 @@
         </div>
     </div>
 </div>
+
+<script src="/assets/js/users.js"></script>

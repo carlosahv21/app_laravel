@@ -144,12 +144,6 @@
         $(document).ready(function(){
 
             var modals = ['createUser', 'createProduct'];
-            let inputsHidden = [ 'inputCelular', 'inputDireccion', 'inputBarrio', 'inputLocalidad', 'inputIdentificacion', 'inputPlaca' ];
-
-            // Inputs hidden
-            $.each(inputsHidden, function (idx, nameInputsHidden) {
-                $( '#' + nameInputsHidden ).closest( 'div' ).hide();
-            })
 
             modals.forEach(element => {
                 $("#"+element).on('hidden.bs.modal', function(){
@@ -186,49 +180,7 @@
                 eval(date).set('date_order', $("#date_order").val());
             });
 
-            $("#roleTipo").on("change",function(){
-                    // var inputs = [];
-                var type = $(this).val() ;
-
-                var clientsInputs = [ "inputCelular", "inputDireccion", "inputBarrio", "inputLocalidad", "inputIdentificacion" ];
-                var domiciliaryInpus = [ "inputPlaca" ];
-
-                if(type == 'client') {
-                    // Hidden inputs to clients
-                    hiddenInputs(domiciliaryInpus);
-
-                    // Show inputs to domiciliary
-                    showInputs(clientsInputs);
-
-                }else if(type == 'domiciliary'){
-                    // Hidden inputs to domiciliary
-                    hiddenInputs(clientsInputs);
-
-                    // Show inputs to clients
-                    showInputs(domiciliaryInpus);
-                }else{
-                    // Hidden inputs to domiciliary
-                    // Hidden inputs to clients
-                    hiddenInputs(clientsInputs);
-                    hiddenInputs(domiciliaryInpus);
-                }
-            });
-
         });
-
-        function showInputs(arrayInputs) {
-            $.each(arrayInputs , function( ind, nameInputs ) {
-                $( '#' + nameInputs ).closest( 'div' ).show();
-            });
-
-        }
-
-        function hiddenInputs(arrayInputs) {
-            $.each(arrayInputs , function( ind, nameInputs ) {
-                $( '#' + nameInputs ).closest( 'div' ).hide();
-            });
-
-        }
 
     </script>
 </body>

@@ -63,7 +63,7 @@ class Products extends Component
     {
         Product::where('id',$item)->update(['favorite' => 0]);
 
-        $this->dispatchBrowserEvent('notify', ['type' => 'danger', 'message' => 'Producto removido a favoritos!']);
+        $this->dispatchBrowserEvent('notify', ['type' => 'danger', 'message' => 'Producto removido de favoritos!']);
     }
 
     public function render()
