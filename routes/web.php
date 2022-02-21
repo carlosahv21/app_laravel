@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
     Route::get('/users', Users::class)->name('users');
-    Route::get('/products', Products::class)->name('products');
+    Route::get('/list-products', Products::class)->name('products');
     // Route::get('/orders', Orders::class)->name('orders');
     Route::get('/orders', Orders::class)->name('orders');
     Route::get('/list-order', ListOrders::class)->name('list-order');
