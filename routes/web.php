@@ -75,4 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
+    Route::get('/foo', function () {
+        Artisan::call('storage:link');
+    });
 });
