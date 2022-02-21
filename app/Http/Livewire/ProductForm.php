@@ -4,10 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Product;
+use Livewire\WithFileUploads;
 
 class ProductForm extends Component
 {
-    public $name, $reference, $presentation, $price, $stock, $product_image, $modelId, $favorite;
+    use WithFileUploads;
+
+    public $name, $reference, $presentation, $price, $stock, $product_image, $modelId, $favorite, $fileProducts, $seeFileProducts;
     
     protected $listeners = [
         'getModelId',
@@ -25,6 +28,7 @@ class ProductForm extends Component
         $this->presentation = $model->presentation;
         $this->price = $model->price;
         $this->stock = $model->stock;
+        $this->seeFileProducts = $model->product_image;
     }
 
     public function save()
@@ -35,14 +39,18 @@ class ProductForm extends Component
             $product = new Product;
         }
 
+        $this->validate();
+
+        $filename = $this->fileProducts->store('/', 'products');
+
         $product->name = $this->name;
         $product->reference = $this->reference;
         $product->presentation = $this->presentation;
         $product->price = $this->price;
         $product->stock = $this->stock;
         $product->favorite = ($this->favorite) ? 1 : 0;
+        $product->product_image = $filename;
 
-        $this->validate();
         $product->save();
         
         $this->dispatchBrowserEvent('closeModal', ['name' => 'createProduct']);
@@ -57,6 +65,8 @@ class ProductForm extends Component
         $this->presentation = null;
         $this->price = null;
         $this->stock = null;
+        $this->fileProducts = null;
+        $this->seeFileProducts = null;
         $this->modelId = null;
 
     }
@@ -78,6 +88,7 @@ class ProductForm extends Component
             'presentation' => 'required',
             'price' => 'required|numeric',
             'stock' => 'required|numeric|gt:0',
+            'fileProducts' => 'image|max:5120',
         ];
     }
 
