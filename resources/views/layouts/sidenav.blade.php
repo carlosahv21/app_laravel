@@ -38,7 +38,7 @@
         </li>
         <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
         <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
-          <a href="/products" class="nav-link">
+          <a href="/list-products" class="nav-link">
             <span class="sidebar-icon"><i class="fas fa-box"></i></span>
             <span class="sidebar-text">Productos</span>
           </a>
