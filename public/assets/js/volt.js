@@ -100,10 +100,23 @@ d.addEventListener("DOMContentLoaded", function(event) {
     //       });
     // })
 
+    $.fn.datepicker.dates['en'] = {
+        days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+        daysShort: ["Dom", "Lun", "Mar", "Mier", "Jue", "Vie", "Sab"],
+        daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        months:["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+        today: "Today",
+        clear: "Clear",
+        titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+        weekStart: 0
+    };
+
     $('.datepicker').datepicker({
         startDate: 'today',
         autoclose: true,
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        daysOfWeekDisabled : '0',
     });
 
     if(d.querySelector('.input-slider-container')) {

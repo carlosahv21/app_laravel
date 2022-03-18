@@ -13,15 +13,15 @@
                     <div class="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                         <div class="text-center text-md-center mb-4 mt-md-0">
                             <h1 class="mb-3 h3">Bienvenido</h1>
-                            <p class="mb-0"> Cree una nueva cuenta o
-                                <p class="mb-0">Inicie sesión con tus credenciales:</p>
+                            <p class="mb-0"> Crea una cuenta nueva o
+                                <p class="mb-0">Inicia sesión con tus credenciales:</p>
 
                             </p>
                         </div>
                         <form wire:submit.prevent="login" action="#" class="mt-4" method="POST">
                             <!-- Form -->
                             <div class="form-group mb-4">
-                                <label for="email">Tu email</label>
+                                <label for="email">Tu correo electrónico</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><svg
                                             class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20"
