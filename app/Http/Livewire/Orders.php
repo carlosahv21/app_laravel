@@ -87,7 +87,7 @@ class Orders extends Component
     }
 
     public function save(){
-
+        // dd(Cart::instance('cart')->subtotal());exit;
         $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
 
         $order = new Order;

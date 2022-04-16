@@ -1,4 +1,4 @@
-@section('title','Pedidos')
+@section('title','Domiciliados')
 
 <div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -11,7 +11,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#">Jointrust</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Lista de Pedidos</li>
+                    <li class="breadcrumb-item active" aria-current="page">Lista de Domiciliados</li>
                 </ol>
             </nav>
         </div>
@@ -33,7 +33,7 @@
                     <span class="input-group-text">
                         <span class="fas fa-search"></span>
                     </span>
-                    <input wire:model="search" type="text" class="form-control" placeholder="Buscar pedido">
+                    <input wire:model="search" type="text" class="form-control" placeholder="Buscar domiciliado">
                 </div>
             </div>
             {{-- <div class="col-3 col-lg-3 d-md-flex">
@@ -45,16 +45,10 @@
                 </select>
                 <button class="btn btn-sm px-3 btn-secondary ms-3">Apply</button>
             </div> --}}
-            <div class="col-3 col-lg-3 d-flex justify-content-end">
-
-                <a href="/orders"  class="btn btn-secondary me-2 dropdown-toggle" >
-                    <span class="fas fa-plus"></span> Crear Pedidos
-                </a>
-            </div>
         </div>
     </div>
     <div class="card shadow border-0 table-wrapper table-responsive">
-        @if ($orders->count())
+        @if ($orders_domiciliaries->count())
             <div wire:loading.class="opacity-50">
                 <table class="table order-table align-items-center">
                     <thead class="thead-dark">
@@ -67,14 +61,13 @@
                                 </div>
                             </th>
                             <th>Referencia del pedido</th>
-                            <th>Total</th>
-                            <th>Fecha de Entrega</th>
-                            <th>Estado</th>
+                            <th>Usuario Asignado</th>
+                            <th>Fecha de Asignación</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders as $order)
+                        @foreach ($orders_domiciliaries as $order)
                             <tr>
                                 <td>
                                     <div class="form-check dashboard-check">
@@ -84,22 +77,16 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{ $order->code }}
+                                    {{ $order->orders->code }}
                                 </td>
-                                <th> <i class="fas fa-dollar-sign"></i> {{ number_format($order->total,'2',',','.')  }}</th>
-                                <th>{{ $order->date_order }}</th>
-                                <th>{{ $order->state }}</th>
+                                <th>{{ ucfirst($order->user->first_name) }} {{ ucfirst($order->user->last_name) }}</th>
+                                <th>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y')  }}</th>
                                 <th style="width: 5%;">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-h"></i>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li>
-                                                <a wire:click="selectItem({{ $order->id }}, 'update')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
                                             @if ($order->role != 'admin')
-                                                <li>
-                                                    <button wire:click="selectItem({{ $order->id }}, 'assignDomiciliary')" class="dropdown-item btn-outline-gray-500 text-info"><i class="fas fa-user-check"></i> Asignar Domiciliario</button>
-                                                </li>
                                                 <li>
                                                     <button wire:click="selectItem({{ $order->id }}, 'delete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button>
                                                 </li>
@@ -113,34 +100,21 @@
                 </table>
             </div>
             <div class="d-flex justify-content-end py-4">
-                {{ $orders->links()}}
+                {{ $orders_domiciliaries->links()}}
             </div>
         @else
             <div class="d-flex justify-content-center py-6">
-                <span class="text-gray-500"><i class="fas fa-archive"></i>  No hay pedidos para mostrar </span>
+                <span class="text-gray-500"><i class="fas fa-archive"></i>  No hay domiciliados para mostrar </span>
             </div>
         @endif
     </div>
-    <!-- Modal Add-->
-    <div wire:ignore.self class="modal fade" id="createOrder" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="h6 modal-title">Crear Pedidos</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{-- @livewire('order-form') --}}
-                </div>
-            </div>
-        </div>
-    </div>
+     
     <!-- Modal Delete-->
-    <div wire:ignore.self class="modal fade" id="deleteOrder" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="deleteDomiciliary" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="h6 modal-title">Eliminar Pedidos</h2>
+                    <h2 class="h6 modal-title">Eliminar Domiciliado</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -153,49 +127,5 @@
             </div>
         </div>
     </div>
-    <!-- Modal Delete Masive-->
-    <div wire:ignore.self class="modal fade" id="deleteOrderMasive" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="h6 modal-title">Eliminar Pedidos</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Deseas eliminar este registro?
-                </div>
-                <div class="modal-footer">
-                    <button wire:click="delete" class="btn btn-secondary">Eliminar</button>
-                    <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Assign Domiciliary-->
-    <div wire:ignore.self class="modal fade" id="assignDomiciliary" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="h6 modal-title">Asignar Domicialiario</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-12 p-2">
-                        <label for="inputIdDomiciliary" class="form-label">Usuarios <span class="text-danger"> *</span></label>
-                        <select wire:model="idDomiciliary" id="inputIdDomiciliary" class="form-control">
-                            <option disabled="" selected>Elegir</option>
-                            @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->first_name}} {{$user->last_name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                   
-                </div>
-                <div class="modal-footer">
-                    <button wire:click="saveDomiciliary" class="btn btn-secondary">Guardar</button>
-                    <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>

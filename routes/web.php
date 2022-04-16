@@ -28,7 +28,7 @@ use App\Http\Livewire\Users;
 use App\Http\Livewire\Products;
 use App\Http\Livewire\Orders;
 use App\Http\Livewire\ListOrders;
-
+use App\Http\Livewire\ListDomiciliary;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +62,8 @@ Route::middleware('auth')->group(function () {
     // Route::get('/orders', Orders::class)->name('orders');
     Route::get('/orders', Orders::class)->name('orders');
     Route::get('/list-order', ListOrders::class)->name('list-order');
+    Route::get('/list-domiciliary', ListDomiciliary::class)->name('list-domiciliary');
+
     Route::get('/login-example', LoginExample::class)->name('login-example');
     Route::get('/register-example', RegisterExample::class)->name('register-example');
     Route::get('/forgot-password-example', ForgotPasswordExample::class)->name('forgot-password-example');
