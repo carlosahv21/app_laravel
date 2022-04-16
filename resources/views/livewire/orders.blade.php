@@ -110,7 +110,7 @@
                                                 <p> 
                                                     <i class="fas fa-dollar-sign"></i> 
                                                     <span>
-                                                        {{ number_format($item->subtotal,'2',',','.') }}
+                                                        {{ $item->subtotal }}
                                                     </span>
                                                 </p>
                                             </div>
@@ -166,7 +166,7 @@
                                         <strong>Subtotal</strong>
                                     </td>
                                     <td class="right">
-                                        <i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->subtotal(),'2',',','.') }}
+                                        <i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->subtotal(),'2',',','.') }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -174,7 +174,7 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td class="right">
-                                        <strong><i class="fas fa-dollar-sign"></i> {{number_format( Cart::instance('cart')->total(),'2',',','.') }}</strong>
+                                        <strong><i class="fas fa-dollar-sign"></i> {{number_format((float) Cart::instance('cart')->total(),'2',',','.') }}</strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -260,12 +260,12 @@
                                 </td>
                                 <td class="text-center">
                                     <p> 
-                                        <i class="fas fa-dollar-sign"></i>  {{ number_format($item->price,'2',',','.') }}
+                                        <i class="fas fa-dollar-sign"></i>  {{ number_format((float)$item->price,'2',',','.') }}
                                     </p>
                                 </td>
                                 <td>
                                     <p> 
-                                        <i class="fas fa-dollar-sign"></i> {{ number_format($item->subtotal,'2',',','.') }}
+                                        <i class="fas fa-dollar-sign"></i> {{ number_format((float)$item->subtotal,'2',',','.') }}
 
                                     </p>
                                 </td>
@@ -282,7 +282,7 @@
                                         <strong>Subtotal</strong>
                                     </td>
                                     <td class="right">
-                                        <i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->subtotal(),'2',',','.') }}
+                                        <i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->subtotal(),'2',',','.') }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -290,7 +290,7 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td class="right">
-                                        <strong><i class="fas fa-dollar-sign"></i> {{ number_format( Cart::instance('cart')->total(),'2',',','.') }}</strong>
+                                        <strong><i class="fas fa-dollar-sign"></i> {{ number_format( (float)Cart::instance('cart')->total(),'2',',','.') }}</strong>
                                     </td>
                                 </tr>
                             </tbody>

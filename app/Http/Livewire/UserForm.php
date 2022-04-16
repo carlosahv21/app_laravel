@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserForm extends Component
 {
-    public $first_name, $last_name, $email, $phone, $address, $neighborhood, $location, $role, $identificacion, $modelId;
+    public $first_name, $last_name, $email, $phone, $address, $neighborhood, $location, $role, $identificacion, $enrollment, $modelId;
     
     protected $listeners = [
         'getModelId',
@@ -30,10 +30,12 @@ class UserForm extends Component
         $this->location = $model->location;
         $this->role = $model->role;
         $this->identificacion = $model->identificacion;
+        $this->enrollment = $model->enrollment;
     }
 
     public function save()
     {
+
         if($this->modelId){
             $user = User::findOrFail($this->modelId);
         }else{
@@ -49,6 +51,7 @@ class UserForm extends Component
         $user->location = $this->location;
         $user->role = $this->role;
         $user->identificacion = $this->identificacion;
+        $user->enrollment = $this->enrollment;
         $user->password = Hash::make('123456');
 
         $this->validate();
@@ -71,6 +74,7 @@ class UserForm extends Component
         $this->location = null;
         $this->role = null;
         $this->identificacion = null;
+        $this->enrollment = null;
     }
 
     public function forcedCloseModal()
@@ -88,7 +92,7 @@ class UserForm extends Component
             'first_name' => 'required|max:15',
             'last_name' => 'required|max:20',
             'email' => 'required|email|unique:users',
-            'phone' => 'required',
+            // 'phone' => 'required',
             'role' => 'required',
         ];
     }

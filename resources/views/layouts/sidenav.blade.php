@@ -49,6 +49,12 @@
             <span class="sidebar-text">Pedidos</span>
           </a>
         </li>
+        <li class="nav-item {{ Request::segment(1) == 'list-domiciliary' ? 'active' : '' }}">
+          <a href="/list-domiciliary" class="nav-link">
+            <span class="sidebar-icon"><i class="fas fa-user-check"></i></span>
+            <span class="sidebar-text">Domiciliados</span>
+          </a>
+        </li>
       @elseif(auth()->user()->role == 'client')
         <li class="nav-item {{ Request::segment(1) == 'orders' ? 'active' : '' }}">
           <a href="/orders" class="nav-link">

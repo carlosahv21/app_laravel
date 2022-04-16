@@ -15,22 +15,20 @@
 
 */
 
-$(document).ready(function(){
-
-    let inputsHidden = [ 'inputCelular', 'inputDireccion', 'inputBarrio', 'inputLocalidad', 'inputIdentificacion', 'inputPlaca' ];
-
-    // Inputs hidden
-    $.each(inputsHidden, function (idx, nameInputsHidden) {
-        $( '#' + nameInputsHidden ).closest( 'div' ).hide();
+window.addEventListener("load", () => { // when the page loads
+    const inputsHidden = ['inputCelular', 'inputDireccion', 'inputBarrio', 'inputLocalidad', 'inputIdentificacion', 'inputPlaca'];    
+   
+    inputsHidden.forEach((element) => {
+        document.getElementById(element).closest('div').classList.remove('d-block')
+        document.getElementById(element).closest('div').classList.add('d-none')
     })
-
-    $("#roleTipo").on("change",function(){
-        // var inputs = [];
-        var type = $(this).val() ;
-
-        var clientsInputs = [ "inputCelular", "inputDireccion", "inputBarrio", "inputLocalidad", "inputIdentificacion" ];
-        var domiciliaryInpus = [ "inputPlaca" ];
-
+  
+    document.getElementById('roleTipo').addEventListener('change', function () {
+        let type = this.value;
+   
+        let clientsInputs = [ "inputCelular", "inputDireccion", "inputBarrio", "inputLocalidad", "inputIdentificacion" ];
+        let domiciliaryInpus = [ "inputPlaca" ];
+        
         if(type == 'client') {
             // Hidden inputs to clients
             hiddenInputs(domiciliaryInpus);
@@ -44,24 +42,25 @@ $(document).ready(function(){
 
             // Show inputs to clients
             showInputs(domiciliaryInpus);
-        }else{
+        }else if(type == 'admin'){
             // Hidden inputs to domiciliary
             // Hidden inputs to clients
             hiddenInputs(clientsInputs);
             hiddenInputs(domiciliaryInpus);
         }
-    });
-});
-
+    })
+})
+ 
 function showInputs(arrayInputs) {
-    $.each(arrayInputs , function( ind, nameInputs ) {
-        $( '#' + nameInputs ).closest( 'div' ).show();
-    });
-
+    arrayInputs.forEach((element) => {
+        document.getElementById(element).closest('div').classList.remove('d-none')
+        document.getElementById(element).closest('div').classList.add('d-block')
+    })
 }
 
 function hiddenInputs(arrayInputs) {
-    $.each(arrayInputs , function( ind, nameInputs ) {
-        $( '#' + nameInputs ).closest( 'div' ).hide();
-    });
+    arrayInputs.forEach((element) => {         
+        document.getElementById(element).closest('div').classList.remove('d-block')
+        document.getElementById(element).closest('div').classList.add('d-none')
+    })
 }
