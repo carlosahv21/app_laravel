@@ -77,7 +77,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{ $order->orders->code }}
+                                    {{  Orders::getReference($order->orders->code) }}
                                 </td>
                                 <th>{{ ucfirst($order->user->first_name) }} {{ ucfirst($order->user->last_name) }}</th>
                                 <th>{{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y')  }}</th>

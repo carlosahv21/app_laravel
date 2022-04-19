@@ -12,7 +12,7 @@ use App\Models\OrderDomiciliary;
 class ListOrders extends Component
 {
     use WithPagination;
-    public $item, $action, $search, $countOrders = '', $idDomiciliary;
+    public $item, $action, $search, $countOrders, $idDomiciliary = '';
     public $selected = [];
     public $orders_products = [];
     

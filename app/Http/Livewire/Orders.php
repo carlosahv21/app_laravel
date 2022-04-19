@@ -87,11 +87,9 @@ class Orders extends Component
     }
 
     public function save(){
-        // dd(Cart::instance('cart')->subtotal());exit;
-        $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
-
+        
         $order = new Order;
-        $order->code = ($result->count()) ? $result->first()->code + 1 : 1 ;
+        $order->code = $this->getReference();
         $order->subtotal = Cart::instance('cart')->subtotal();
         $order->tax = 0;
         $order->total = Cart::instance('cart')->total();
@@ -116,6 +114,36 @@ class Orders extends Component
         $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
 
     }
+
+    static public function getReference($num) {
+		// La nomenclatura sera join_order_0001
+
+        $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
+        $code = 'ORDER';
+        $num_code = $num;
+
+		$countNumber = strlen($num_code);
+
+		switch ($countNumber) {
+			case '1':
+				$newSeq = '000'.$num_code;
+				break;
+			case '2':
+				$newSeq = '00'.$num_code;
+				break;
+			case '3':
+				$newSeq = '0'.$num_code;
+				break;
+            case '3':
+                $newSeq = $num_code;
+                break;
+			default:
+				$newSeq = $num_code;
+				break;
+		}
+
+		return $code."_".$newSeq;
+	}
 
     public function sendEmail( $lastOrder )
     {

@@ -84,7 +84,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{ $order->code }}
+                                    {{ Orders::getReference($order->code) }}
                                 </td>
                                 <th> <i class="fas fa-dollar-sign"></i> {{ number_format($order->total,'2',',','.')  }}</th>
                                 <th>{{ $order->date_order }}</th>
