@@ -43,7 +43,7 @@ class UserForm extends Component
             $user = User::findOrFail($this->modelId);
         }else{
             $user = new User;
-            $this->validate();
+            
         }
 
         $user->first_name = $this->first_name;
@@ -60,7 +60,7 @@ class UserForm extends Component
         $user->identificacion = $this->identificacion;
         $user->enrollment = $this->enrollment;
         $user->password = Hash::make('123456');
-
+        $this->validate();
         
         $user->save();
         
