@@ -37,16 +37,6 @@
                 </div>
             @endif
         </div>
-       
-        <div class="col-12 p-2" >
-            <label for="inputDireccion" class="form-label">Direccion <span class="text-danger"> *</span></label>
-            <input wire:model.defer="address" type="text" class="form-control" placeholder="Direccion completa que incluya nombre edificio o conjunto" id="inputDireccion" >
-            @if ($errors->has('address'))
-                <div class="invalid-feedback">
-                    {{ $errors->first('address') }}
-                </div>
-            @endif
-        </div>
         <div class="col-6 p-2" ">
             <label for="inputCelular" class="form-label">Celular</label>
             <input wire:model.defer="phone" type="text" class="form-control" placeholder="Ej: 311999999" id="inputCelular">
@@ -56,6 +46,25 @@
                 </div>
             @endif
         </div>
+        <div class="col-6 p-2">
+            <label for="inputCumpleanios" class="form-label">Cumpleaños</label>
+            <input wire:model="user.date_birthday" type="text" class="form-control" placeholder="Ej: 15/10/1990" id="inputCumpleanios">
+            @if ($errors->has('user.date_birthday'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('user.date_birthday') }}
+                </div>
+            @endif
+        </div>       
+        <div class="col-12 p-2" >
+            <label for="inputDireccion" class="form-label">Direccion <span class="text-danger"> *</span></label>
+            <input wire:model.defer="address" type="text" class="form-control" placeholder="Direccion completa que incluya nombre edificio o conjunto" id="inputDireccion" >
+            @if ($errors->has('address'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('address') }}
+                </div>
+            @endif
+        </div>
+       
         <div class="col-6 p-2">
             <label for="inputBarrio" class="form-label">Barrio </label>
             <input wire:model.defer="neighborhood" type="text" class="form-control" placeholder="Ej: Castilla" id="inputBarrio">
@@ -71,6 +80,24 @@
             @if ($errors->has('location'))
                 <div class="invalid-feedback">
                     {{ $errors->first('location') }}
+                </div>
+            @endif
+        </div>
+        <div class="col-6 p-2">
+            <label for="inputCiudad" class="form-label">Ciudad</label>
+            <input wire:model="city" type="text" class="form-control" placeholder="Ej: Barranquilla" id="inputCiudad">
+            @if ($errors->has('city'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('city') }}
+                </div>
+            @endif
+        </div>
+        <div class="col-6 p-2">
+            <label for="inputMunicipio" class="form-label">Municipio</label>
+            <input wire:model="municipality" type="text" class="form-control" placeholder="Ej: Tunja" id="inputMunicipio">
+            @if ($errors->has('municipality'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('municipality') }}
                 </div>
             @endif
         </div>

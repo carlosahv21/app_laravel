@@ -30,7 +30,7 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="col-6 p-2">
+                        <div class="col-4 p-2">
                             <label for="inputEmail" class="form-label">Email <span class="text-danger"> *</span></label>
                             <input wire:model="user.email" type="text" class="form-control" placeholder="Ej: johndoe@test.com" id="inputEmail">
                             @if ($errors->has('user.email'))
@@ -39,12 +39,21 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="col-6 p-2">
+                        <div class="col-4 p-2">
                             <label for="inputCelular" class="form-label">Celular</label>
                             <input wire:model="user.phone" type="text" class="form-control" placeholder="Ej: 311999999" id="inputCelular">
                             @if ($errors->has('user.phone'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('user.phone') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-4 p-2">
+                            <label for="inputCumpleanios" class="form-label">Cumpleaños</label>
+                            <input wire:model="user.date_birthday" type="date" class="form-control" placeholder="Ej: 15/10/1990" id="inputCumpleanios">
+                            @if ($errors->has('user.date_birthday'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('user.date_birthday') }}
                                 </div>
                             @endif
                         </div>
@@ -76,6 +85,25 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="col-6 p-2">
+                            <label for="inputCiudad" class="form-label">Ciudad</label>
+                            <input wire:model="user.city" type="text" class="form-control" placeholder="Ej: Barranquilla" id="inputCiudad">
+                            @if ($errors->has('user.city'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('user.city') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-6 p-2">
+                            <label for="inputMunicipio" class="form-label">Municipio</label>
+                            <input wire:model="user.municipality" type="text" class="form-control" placeholder="Ej: Tunja" id="inputMunicipio">
+                            @if ($errors->has('user.municipality'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('user.municipality') }}
+                                </div>
+                            @endif
+                        </div>
+                                               
                         @if (auth()->user()->role == 'admin')
                             <div class="col-6 p-2">
                                 <label for="inputTipo" class="form-label">Rol <span class="text-danger"> *</span></label>
@@ -145,7 +173,7 @@
             </div>
             <div class="col-12">
                 <div class="card card-body border-0 shadow mb-4">
-                    <h2 class="h5 mb-4">Select profile photo</h2>
+                    <h2 class="h5 mb-4">Selecciona tu foto de perfil</h2>
                     <div class="d-flex align-items-center">
                         <div class="me-3">
                             <!-- Avatar -->

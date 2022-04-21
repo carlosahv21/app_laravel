@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserForm extends Component
 {
-    public $first_name, $last_name, $email, $phone, $address, $neighborhood, $location, $role, $identificacion, $enrollment, $modelId;
+    public $first_name, $last_name, $email, $phone, $date_birthday, $address, $neighborhood, $location, $city, $municipality, $role, $identificacion, $enrollment, $modelId;
     
     protected $listeners = [
         'getModelId',
-        'forcedCloseModal'
+        'forcedCloseModal',
     ];
 
     public function getModelId($modelId)
@@ -25,9 +25,12 @@ class UserForm extends Component
         $this->last_name = $model->last_name;
         $this->email = $model->email;
         $this->phone = $model->phone;
+        $this->date_birthday = $model->date_birthday;
         $this->address = $model->address;
         $this->neighborhood = $model->neighborhood;
         $this->location = $model->location;
+        $this->city = $model->city;
+        $this->municipality = $model->municipality;
         $this->role = $model->role;
         $this->identificacion = $model->identificacion;
         $this->enrollment = $model->enrollment;
@@ -40,21 +43,25 @@ class UserForm extends Component
             $user = User::findOrFail($this->modelId);
         }else{
             $user = new User;
+            $this->validate();
         }
 
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->email = $this->email;
         $user->phone = $this->phone;
+        $user->date_birthday = $this->date_birthday;
         $user->address = $this->address;
         $user->neighborhood = $this->neighborhood;
         $user->location = $this->location;
+        $user->city = $this->city;
+        $user->municipality = $this->municipality;
         $user->role = $this->role;
         $user->identificacion = $this->identificacion;
         $user->enrollment = $this->enrollment;
         $user->password = Hash::make('123456');
 
-        $this->validate();
+        
         $user->save();
         
         $this->dispatchBrowserEvent('closeModal', ['name' => 'createUser']);
@@ -69,12 +76,17 @@ class UserForm extends Component
         $this->last_name = null;
         $this->email = null;
         $this->phone = null;
+        $this->date_birthday = null;
         $this->address = null;
         $this->neighborhood = null;
         $this->location = null;
+        $this->city = null;
+        $this->municipality = null;
         $this->role = null;
         $this->identificacion = null;
         $this->enrollment = null;
+
+        $this->title_modal = '';
     }
 
     public function forcedCloseModal()
