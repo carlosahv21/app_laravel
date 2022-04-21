@@ -16,7 +16,7 @@
 */
 
 window.addEventListener("load", () => { // when the page loads
-    const inputsHidden = ['inputCelular', 'inputDireccion', 'inputBarrio', 'inputLocalidad', 'inputIdentificacion', 'inputPlaca'];    
+    const inputsHidden = ['inputCelular', 'inputCumpleanios','inputDireccion', 'inputBarrio', 'inputLocalidad', 'inputCiudad','inputMunicipio', 'inputIdentificacion', 'inputPlaca'];    
    
     inputsHidden.forEach((element) => {
         document.getElementById(element).closest('div').classList.remove('d-block')
@@ -26,7 +26,7 @@ window.addEventListener("load", () => { // when the page loads
     document.getElementById('roleTipo').addEventListener('change', function () {
         let type = this.value;
    
-        let clientsInputs = [ "inputCelular", "inputDireccion", "inputBarrio", "inputLocalidad", "inputIdentificacion" ];
+        let clientsInputs = [ "inputCelular", "inputCumpleanios", "inputDireccion", "inputBarrio", "inputLocalidad", "inputCiudad", "inputMunicipio","inputIdentificacion" ];
         let domiciliaryInpus = [ "inputPlaca" ];
         
         if(type == 'client') {
@@ -42,7 +42,7 @@ window.addEventListener("load", () => { // when the page loads
 
             // Show inputs to clients
             showInputs(domiciliaryInpus);
-        }else if(type == 'admin'){
+        }else {
             // Hidden inputs to domiciliary
             // Hidden inputs to clients
             hiddenInputs(clientsInputs);

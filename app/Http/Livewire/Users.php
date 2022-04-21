@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class Users extends Component
 {
     use WithPagination;
-    public $item, $action, $search, $countUsers = '';
+    public $item, $action, $search, $countUsers = '', $title_modal = '';
     public $selected = [];
 
     protected $paginationTheme = 'bootstrap';
@@ -26,7 +26,12 @@ class Users extends Component
         }else if($action == 'masiveDelete'){
             $this->dispatchBrowserEvent('openModal', ['name' => 'deleteUserMasive']);
             $this->countUsers = count($this->selected);
+        }else if($action == 'create'){
+            $this->title_modal = 'Crear Usuario';
+            $this->dispatchBrowserEvent('openModal', ['name' => 'createUser']);
+            $this->emit('clearForm');
         }else{
+            $this->title_modal = 'Editar Usuario';
             $this->dispatchBrowserEvent('openModal', ['name' => 'createUser']);
             $this->emit('getModelId', $this->item);
         }

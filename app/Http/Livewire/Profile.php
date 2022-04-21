@@ -23,14 +23,22 @@ class Profile extends Component
             'user.last_name' => 'required|max:20',
             'user.email' => 'required|email',
             'user.phone' => 'required',
+            'user.date_birthday' => 'date',
             'user.address' => 'required|max:40',
             'user.neighborhood' => 'required',
             'user.location' => 'required',
+            'user.city' => 'required',
+            'user.municipality' => 'required',
             'user.role' => 'required',
             'user.identificacion' => 'required',
-            'user.confirm' => 'required',
-            'user.method' => 'max:20'
+            
         ];
+        if (auth()->user()->role == 'client'){
+            return [
+                'user.confirm' => 'required',
+                'user.method' => 'max:20'
+            ];
+        }
     }
 
     public function mount() {
