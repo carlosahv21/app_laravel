@@ -134,13 +134,6 @@
                                         Acepto y autorizo recibir a través de WhatsApp y/o mail la información de productos disponibles del día. 
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input wire:model="user.confirm" class="form-check-input" type="radio" name="confirm" id="confirm2" value="option2">
-                                    <label class="form-check-label" for="confirm2">
-                                        Prefiero otro método. 
-                                    </label>
-                                    <input wire:ignore.self wire:model="user.method"  type="text" class="form-control" placeholder="Cual método?" id="method" style="display: none">
-                                </div>
                             </div>
                         </div>
                     @endif
