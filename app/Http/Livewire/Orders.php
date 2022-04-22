@@ -27,7 +27,7 @@ class Orders extends Component
     }
 
     protected $messages = [
-        'radioButtom.required' => 'Select at least one delivery.'
+        'radioButtom.required' => 'Seleccione al menos una entrega.'
     ];
 
     public function addProduct($id, $name, $price, $reference)
@@ -79,6 +79,10 @@ class Orders extends Component
 
     public function resume(){
         if(Cart::instance('cart')->count() > 0){
+            if (empty($this->date_order)) {
+                return $this->dispatchBrowserEvent('showMessagge');
+            }
+
             $this->validate();
             $this->dispatchBrowserEvent('openModal', ['name' => 'resumeOrder']);
         }else{
