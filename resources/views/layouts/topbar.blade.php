@@ -157,7 +157,11 @@
           <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             <div class="media d-flex align-items-center">
-              <img class="avatar rounded-circle" alt="Image placeholder" src="/assets/img/team/profile-picture-1.jpg">
+              @if(auth()->user()->user_image)
+              <img class="avatar rounded-circle" alt="Imagen Perfil" src="{{asset('/images_profile/'.auth()->user()->user_image)}}">   
+              @else
+              <img class="avatar rounded-circle" alt="Imagen Perfil" src="/assets/img/team/profile-picture-1.jpg">
+              @endif
               <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                 <span
                   class="mb-0 font-small fw-bold text-gray-900">{{  auth()->user()->first_name ? auth()->user()->first_name . ' ' . auth()->user()->last_name : 'User Name'}}</span>

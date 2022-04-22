@@ -28,6 +28,7 @@ class User extends Authenticatable
     'city',
     'municipality',    
     'role',
+    'user_image',
     'identificacion',
     'confirm'
     ];
