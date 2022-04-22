@@ -230,7 +230,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Orders' => App\Http\Livewire\Orders::class,
-        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];
