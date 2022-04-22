@@ -151,6 +151,9 @@
                                         <i class="fas fa-calendar-day"></i>
                                     </span>
                                     <input data-date-order="@this" id="date_order" autocomplete="off" class="form-control datepicker" type="text" placeholder="dd/mm/yyyy">                                               
+                                    <div id="dateOrderError" class="invalid-feedback text-center" style="display:none">
+                                        La fecha de entrega es requerida.
+                                    </div>
                                 </div>                                            
                             </div>
                         </div>

@@ -96,6 +96,10 @@
             $('#'+event.detail.name).modal('show');
         })
 
+        window.addEventListener('showMessagge', event => {
+            $('#dateOrderError').show();
+        })
+
         window.addEventListener('notify', event => {
             
             var backgroud = '';
@@ -176,6 +180,7 @@
             });
 
             $(".datepicker").on("change",function(){
+                $('#dateOrderError').hide();
                 let date = $(this).data('date-order');
                 eval(date).set('date_order', $("#date_order").val());
             });
