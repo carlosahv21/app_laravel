@@ -89,7 +89,7 @@ class Orders extends Component
     public function save(){
         
         $order = new Order;
-        $order->code = $this->getReference();
+        $order->code = '1';
         $order->subtotal = Cart::instance('cart')->subtotal();
         $order->tax = 0;
         $order->total = Cart::instance('cart')->total();

@@ -8,7 +8,7 @@
         </div>
         @endif
         <div class="card card-body border-0 shadow mb-4">
-            <h2 class="h5 mb-4">Informacion de {{  $user->first_name ." ". $user->last_name}}</h2>
+            <h2 class="h5 mb-4">Informacion del Cliente</h2>
             <div>
                 <form wire:submit.prevent="save" action="#" method="POST">
                     <div class="row align-items-start p-2">
