@@ -30,7 +30,7 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="col-6 p-2">
+                        <div class="col-4 p-2">
                             <label for="inputEmail" class="form-label">Email <span class="text-danger"> *</span></label>
                             <input wire:model="user.email" type="text" class="form-control" placeholder="Ej: johndoe@test.com" id="inputEmail">
                             @if ($errors->has('user.email'))
@@ -39,12 +39,21 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="col-6 p-2">
+                        <div class="col-4 p-2">
                             <label for="inputCelular" class="form-label">Celular</label>
                             <input wire:model="user.phone" type="text" class="form-control" placeholder="Ej: 311999999" id="inputCelular">
                             @if ($errors->has('user.phone'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('user.phone') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-4 p-2">
+                            <label for="inputCumpleanios" class="form-label">Cumpleaños</label>
+                            <input wire:model="user.date_birthday" type="date" class="form-control" placeholder="Ej: 15/10/1990" id="inputCumpleanios">
+                            @if ($errors->has('user.date_birthday'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('user.date_birthday') }}
                                 </div>
                             @endif
                         </div>
@@ -76,6 +85,25 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="col-6 p-2">
+                            <label for="inputCiudad" class="form-label">Ciudad</label>
+                            <input wire:model="user.city" type="text" class="form-control" placeholder="Ej: Barranquilla" id="inputCiudad">
+                            @if ($errors->has('user.city'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('user.city') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-6 p-2">
+                            <label for="inputMunicipio" class="form-label">Municipio</label>
+                            <input wire:model="user.municipality" type="text" class="form-control" placeholder="Ej: Tunja" id="inputMunicipio">
+                            @if ($errors->has('user.municipality'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('user.municipality') }}
+                                </div>
+                            @endif
+                        </div>
+                                               
                         @if (auth()->user()->role == 'admin')
                             <div class="col-6 p-2">
                                 <label for="inputTipo" class="form-label">Rol <span class="text-danger"> *</span></label>
@@ -130,8 +158,13 @@
                     <div wire:ignore.self class="profile-cover rounded-top"
                         data-background="../assets/img/profile-cover.jpg"></div>
                     <div class="card-body pb-5">
-                        <img src="../assets/img/team/profile-picture-1.jpg"
-                            class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
+                        @if ($upload)
+                        <img class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" src="{{ $upload->temporaryUrl() }}" alt="change avatar" width="100" height="100">                        
+                        @elseif($user->user_image)
+                        <img src="{{ asset('/images_profile/'.$user->user_image) }}" }}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="{{  $user->first_name ." ". $user->last_name}}">
+                        @else
+                        <img src="../assets/img/team/profile-picture-1.jpg" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="{{  $user->first_name ." ". $user->last_name}}">
+                        @endif
                         <h4 class="h3">
                             {{  $user->first_name ." ". $user->last_name}}
                         </h4>
@@ -145,26 +178,42 @@
             </div>
             <div class="col-12">
                 <div class="card card-body border-0 shadow mb-4">
-                    <h2 class="h5 mb-4">Select profile photo</h2>
+                    <h2 class="h5 mb-4">Selecciona tu foto de perfil</h2>
                     <div class="d-flex align-items-center">
                         <div class="me-3">
                             <!-- Avatar -->
                             <div class="user-avatar xl-avatar">
+                                @if ($upload)
+                                <img class="rounded avatar-xl" src="{{ $upload->temporaryUrl() }}" alt="change avatar" width="100" height="100">                        
+                                @elseif($user->user_image)
+                                <img class="rounded avatar-xl" src="{{ asset('/images_profile/'.$user->user_image) }}" alt="change avatar" width="100" height="100"> 
+                                @else
                                 <img class="rounded avatar-xl" src="https://volt-pro-laravel-admin-dashboard.updivision.com/avatars/profile-picture-1.jpg" alt="change avatar" width="100" height="100">
+                                @endif
                             </div>
                         </div>
                         <div class="file-field">
                             <div class="d-flex justify-content-xl-center ms-xl-3">
-                                <div class="d-flex">
-                                    <svg class="icon text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <input wire:model="upload" type="file" accept="image/*">
-                                    <div class="d-md-block text-left">
-                                        <div class="fw-normal text-dark mb-1">Choose Image</div>
-                                        <div class="text-gray small">JPG, GIF or PNG. Max size of 2MB</div>
+                                <form wire:submit.prevent="update">
+                                    <div class="d-flex">
+                                            <svg class="icon text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <input wire:model="upload" type="file" accept="image/*">
+                                        @if ($errors->has('upload'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('upload') }}
+                                            </div>
+                                        @endif
+                                        <div class="d-md-block text-left">
+                                            <div class="fw-normal text-dark mb-1">Escoger Imagen</div>
+                                            <div class="text-gray small">JPG, GIF or PNG. Max size of 2MB</div>
+                                            <button class="btn btn-facebook d-inline-flex align-items-center" type="submit">
+                                                Actualizar Foto
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

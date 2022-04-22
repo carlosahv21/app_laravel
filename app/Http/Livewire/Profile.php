@@ -6,13 +6,17 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Profile extends Component
 {
+    use WithFileUploads;
+
     public User $user;
     public $showSavedAlert = false;
     public $showDemoNotification = false;
-    
+    public $upload;
+
     protected $listeners = [
         'refreshParent' => '$refresh'
     ];
@@ -23,14 +27,22 @@ class Profile extends Component
             'user.last_name' => 'required|max:20',
             'user.email' => 'required|email',
             'user.phone' => 'required',
+            'user.date_birthday' => 'date',
             'user.address' => 'required|max:40',
             'user.neighborhood' => 'required',
             'user.location' => 'required',
+            'user.city' => 'required',
+            'user.municipality' => 'required',
             'user.role' => 'required',
             'user.identificacion' => 'required',
-            'user.confirm' => 'required',
-            'user.method' => 'max:20'
+            
         ];
+        if (auth()->user()->role == 'client'){
+            return [
+                'user.confirm' => 'required',
+                'user.method' => 'max:20'
+            ];
+        }
     }
 
     public function mount() {
@@ -60,6 +72,19 @@ class Profile extends Component
         }
 
     }
+
+    public function update(){
+        
+        $this->validate([
+            'upload' => 'image|max:2000',
+        ]); 
+        $user = User::findOrFail(auth()->user()->id);
+        $filename = $this->upload->store('/', 'images_profile');
+        $user->user_image = $filename; 
+        $user->save();
+        $this->emit('refreshParent');
+
+    } 
 
     public function first_time(){
         $user = User::findOrFail(auth()->user()->id);

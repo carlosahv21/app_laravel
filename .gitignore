@@ -1,4 +1,3 @@
 /vendor
-/database/migrations/test
 composer.lock
 .env

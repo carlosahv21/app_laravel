@@ -21,10 +21,14 @@ class User extends Authenticatable
     'last_name',
     'email',
     'phone',
+    'date_birthday',
     'address',
     'neighborhood',
     'location',
+    'city',
+    'municipality',    
     'role',
+    'user_image',
     'identificacion',
     'confirm'
     ];
