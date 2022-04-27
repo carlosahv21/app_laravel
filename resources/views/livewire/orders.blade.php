@@ -309,4 +309,19 @@
     </div>
 </div>
 
+<!-- Modal Alert Different Date-->
+<div wire:ignore.self class="modal fade" id="differentDate" tabindex="-1" aria-labelledby="modal-default" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                Sr. (a) {{ auth()->user()->first_name .' '. auth()->user()->last_name}} su pedido queda programado con prioridad, sin embargo, dependemos de la cosecha diaria y en ocasiones el clima nos afecta. Le informaremos oportunamente cualquier novedad.
+            </div>
+            <div class="modal-footer">
+                <button wire:click="acceptPopup" type="button" class="btn btn-secondary">Aceptar</button>
+                <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @include('livewire.form_orders')
