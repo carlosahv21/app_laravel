@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Mail\OrdersMail;
 use Illuminate\Support\Facades\Mail;
 use Cart;
+use Carbon\Carbon;
 
 class Orders extends Component
 {
@@ -94,8 +95,16 @@ class Orders extends Component
         // dd(Cart::instance('cart')->subtotal());exit;
         $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
 
+         
+        $mytime = Carbon::now();
+        $current_date =$mytime->toDateString();
+        
+        $code_order = Order::select('id')->latest('id')->first();
+
+        if($code_order->id > 0) $code_new = $code_order->id + 1; else $code_new = 1;
+ 
         $order = new Order;
-        $order->code = ($result->count()) ? $result->first()->code + 1 : 1 ;
+        $order->code = $code_new;
         $order->subtotal = Cart::instance('cart')->subtotal();
         $order->tax = 0;
         $order->total = Cart::instance('cart')->total();
@@ -105,7 +114,6 @@ class Orders extends Component
         $order->user_id = auth()->user()->id;
 
         $order->save();
-
         $lastOrder = Order::latest()->first();
         $this->sendEmail( $lastOrder );
         
@@ -114,11 +122,20 @@ class Orders extends Component
         }
 
         Cart::instance('cart')->destroy();
-
         $this->dispatchBrowserEvent('closeModal', ['name' => 'resumeOrder']);
 
-        $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
+        if($this->date_order !== $current_date){            
+            $this->dispatchBrowserEvent('openModal', ['name' => 'differentDate']);    
+        }else{
+            $this->date_order = null;
+            $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
+        }
+    }
 
+    public function acceptPopup(){
+        $this->date_order = null;
+        $this->dispatchBrowserEvent('closeModal', ['name' => 'differentDate']);
+        $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
     }
 
     public function sendEmail( $lastOrder )
