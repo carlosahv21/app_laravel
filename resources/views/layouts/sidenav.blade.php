@@ -55,6 +55,12 @@
             <span class="sidebar-text">Domiciliados</span>
           </a>
         </li>
+        <li class="nav-item {{ Request::segment(1) == 'gift-sets' ? 'active' : '' }}">
+          <a href="/gift-sets" class="nav-link">
+            <span class="sidebar-icon"><i class="fas fa-gifts"></i></span>
+            <span class="sidebar-text">Kits de regalos</span>
+          </a>
+        </li>
       @elseif(auth()->user()->role == 'client')
         <li class="nav-item {{ Request::segment(1) == 'orders' ? 'active' : '' }}">
           <a href="/orders" class="nav-link">
