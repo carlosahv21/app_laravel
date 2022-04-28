@@ -29,6 +29,7 @@ use App\Http\Livewire\Products;
 use App\Http\Livewire\Orders;
 use App\Http\Livewire\ListOrders;
 use App\Http\Livewire\ListDomiciliary;
+use App\Http\Livewire\GiftSets;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', Orders::class)->name('orders');
     Route::get('/list-order', ListOrders::class)->name('list-order');
     Route::get('/list-domiciliary', ListDomiciliary::class)->name('list-domiciliary');
+    Route::get('/gift-sets', GiftSets::class)->name('gift-sets');
 
     Route::get('/login-example', LoginExample::class)->name('login-example');
     Route::get('/register-example', RegisterExample::class)->name('register-example');
@@ -81,3 +83,4 @@ Route::middleware('auth')->group(function () {
         Artisan::call('storage:link');
     });
 });
+Route::get('/config-cache', function() {      $exitCode = Artisan::call('config:cache');      return '<h1>Clear Config cleared</h1>';  });
