@@ -90,13 +90,6 @@ class ClassLoader
         return $this->fallbackDirsPsr4;
     }
 
-<<<<<<< HEAD
-    /**
-     * @return string[] Array of classname => path
-     * @psalm-var array<string, string>
-     */
-=======
->>>>>>> 218a142 (Crear modulo Kit de regalos - JOIN-12)
     public function getClassMap()
     {
         return $this->classMap;
