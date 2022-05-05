@@ -100,6 +100,10 @@
             $('#dateOrderError').show();
         })
 
+        window.addEventListener('hideGift', event => {
+            $("#gift").css("display","none");
+        })
+
         window.addEventListener('notify', event => {
             
             var backgroud = '';
