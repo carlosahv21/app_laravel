@@ -105,21 +105,17 @@ class Orders extends Component
         // dd(Cart::instance('cart')->subtotal());exit;
         $result = Order::select('code')->orderBy('id', 'DESC')->limit(1)->get();
 
-         
         $mytime = Carbon::now();
         $current_date =$mytime->toDateString();
         
-        $code_order = Order::select('id')->latest('id')->first();
-
-        if($code_order->id > 0) $code_new = $code_order->id + 1; else $code_new = 1;
- 
         $order = new Order;
-        $order->code = $code_new;
+        $order->code = $this->getReference();
         $order->subtotal = Cart::instance('cart')->subtotal();
         $order->tax = 0;
         $order->gift_sets = $this->gift;
         $order->total = Cart::instance('cart')->total();
         $order->partial_delivery = $this->radioButtom;
+        $order->delivery_address = $this->delivery_address;
         $order->date_order = $this->date_order;
         $order->state = 'Creado';
         $order->user_id = auth()->user()->id;
@@ -143,6 +139,7 @@ class Orders extends Component
         }
 
         $this->clearForm();
+        $this->dispatchBrowserEvent('hideGift');
     }
 
     private function clearForm()
@@ -153,7 +150,7 @@ class Orders extends Component
         $this->date_order = null;
         $this->gift_check = null;
         $this->gift = null;
-        $this->$delivery_address = null;
+        $this->delivery_address = null;
     }
 
     public function acceptPopup(){
@@ -161,6 +158,43 @@ class Orders extends Component
         $this->dispatchBrowserEvent('closeModal', ['name' => 'differentDate']);
         $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
     }
+
+    static public function getReference() {
+		// La nomenclatura sera join_order_0001
+
+        $code_order = Order::select('id')->latest('id')->first();
+
+        if ($code_order || $code_order > 0) {
+            $num_code = $code_order->id+1;
+        }else{
+            $num_code = 1;
+        }
+
+        $code = 'ORDER';
+        
+
+		$countNumber = strlen($num_code);
+
+		switch ($countNumber) {
+			case '1':
+				$newSeq = '000'.$num_code;
+				break;
+			case '2':
+				$newSeq = '00'.$num_code;
+				break;
+			case '3':
+				$newSeq = '0'.$num_code;
+				break;
+            case '3':
+                $newSeq = $num_code;
+                break;
+			default:
+				$newSeq = $num_code;
+				break;
+		}
+
+		return $code."_".$newSeq;
+	}
 
     public function sendEmail( $lastOrder )
     {
