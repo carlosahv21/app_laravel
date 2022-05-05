@@ -34,4 +34,9 @@ class Order extends Model
     {
         return $this->belongsToMany('App\Models\Product');
     }
+
+    public function gifts()
+    {
+        return $this->belongsToMany('App\Models\GiftSet');
+    }
 }

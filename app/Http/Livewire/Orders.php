@@ -10,25 +10,35 @@ use App\Mail\OrdersMail;
 use Illuminate\Support\Facades\Mail;
 use Cart;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Orders extends Component
 {
     use WithPagination;
     public $search = '';
-    public $comment, $radioButtom, $date_order;
+    public $comment, $radioButtom, $date_order, $gift_check, $gift, $delivery_address;
 
     protected $listeners = [
-        'refreshParent' => '$refresh'
+        'refreshParent' => '$refresh',
+        'resetGitf' => 'resetGitf'
     ];
+
+ 
+    public function resetGitf()
+    {
+        $this->gift = null;
+    }
 
     public function rules() {
         return [
-            'radioButtom' => 'required'
+            'radioButtom' => 'required',
+            'delivery_address' =>  'required',
         ];
     }
 
     protected $messages = [
-        'radioButtom.required' => 'Seleccione al menos una entrega.'
+        'radioButtom.required' => 'Seleccione al menos una entrega.',
+        'delivery_address.required' => 'La Dirección de entrega es requerida.'
     ];
 
     public function addProduct($id, $name, $price, $reference)
@@ -105,6 +115,7 @@ class Orders extends Component
         $order->code = $code_new;
         $order->subtotal = Cart::instance('cart')->subtotal();
         $order->tax = 0;
+        $order->gift_sets = $this->gift;
         $order->total = Cart::instance('cart')->total();
         $order->partial_delivery = $this->radioButtom;
         $order->date_order = $this->date_order;
@@ -128,6 +139,19 @@ class Orders extends Component
             $this->date_order = null;
             $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Tu pedido fue creado existosamente!']);
         }
+
+        $this->clearForm();
+    }
+
+    private function clearForm()
+    {
+
+        $this->comment = null;
+        $this->radioButtom = null;
+        $this->date_order = null;
+        $this->gift_check = null;
+        $this->gift = null;
+        $this->$delivery_address = null;
     }
 
     public function acceptPopup(){
@@ -180,7 +204,10 @@ class Orders extends Component
     public function render()
     {
         return view('livewire.orders',
-            ['products' => Product::search('name', $this->search)->paginate(6)]
+            [
+                'products'  => Product::search('name', $this->search)->paginate(6),
+                'gift_sets' => DB::table('gift_sets')->get()
+            ]
         );   
     }
 }
