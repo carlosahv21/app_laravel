@@ -1593,17 +1593,17 @@
         },
         {
             "name": "intervention/image",
-            "version": "dev-master",
-            "version_normalized": "dev-master",
+            "version": "2.7.1",
+            "version_normalized": "2.7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "71167284814a9a08c51699d4c4fefd0303eede73"
+                "reference": "744ebba495319501b873a4e48787759c72e3fb8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/71167284814a9a08c51699d4c4fefd0303eede73",
-                "reference": "71167284814a9a08c51699d4c4fefd0303eede73",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/744ebba495319501b873a4e48787759c72e3fb8c",
+                "reference": "744ebba495319501b873a4e48787759c72e3fb8c",
                 "shasum": ""
             },
             "require": {
@@ -1620,8 +1620,7 @@
                 "ext-imagick": "to use Imagick based image processing.",
                 "intervention/imagecache": "Caching extension for the Intervention Image library"
             },
-            "time": "2022-04-19T17:58:11+00:00",
-            "default-branch": true,
+            "time": "2021-12-16T16:49:26+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1649,8 +1648,8 @@
             "authors": [
                 {
                     "name": "Oliver Vogel",
-                    "email": "oliver@intervention.io",
-                    "homepage": "https://intervention.io/"
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "http://olivervogel.com/"
                 }
             ],
             "description": "Image handling and manipulation library with support for Laravel integration",
@@ -1665,11 +1664,11 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image/issues",
-                "source": "https://github.com/Intervention/image/tree/master"
+                "source": "https://github.com/Intervention/image/tree/2.7.1"
             },
             "funding": [
                 {
-                    "url": "https://paypal.me/interventionio",
+                    "url": "https://www.paypal.me/interventionphp",
                     "type": "custom"
                 },
                 {
