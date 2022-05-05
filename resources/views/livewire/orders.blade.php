@@ -101,7 +101,7 @@
                                     </td>
                                     <td class="text-center">
                                         <p> 
-                                            <i class="fas fa-dollar-sign"></i>  {{ number_format($item->price,'2',',','.') }}
+                                            <i class="fas fa-dollar-sign"></i>  {{ number_format($item->price,'2', ',', '.') }}
                                         </p>
                                     </td>
                                     <td>
@@ -110,7 +110,7 @@
                                                 <p> 
                                                     <i class="fas fa-dollar-sign"></i> 
                                                     <span>
-                                                        {{ $item->subtotal }}
+                                                        {{ number_format((float) $item->subtotal, '2', ',', '.')  }}
                                                     </span>
                                                 </p>
                                             </div>
@@ -151,12 +151,51 @@
                                         <i class="fas fa-calendar-day"></i>
                                     </span>
                                     <input data-date-order="@this" id="date_order" autocomplete="off" class="form-control datepicker" type="text" placeholder="dd/mm/yyyy">                                               
-                                    <div id="dateOrderError" class="invalid-feedback text-center" style="display:none">
+                                    <div id="dateOrderError" class="invalid-feedback" style="display:none">
                                         La fecha de entrega es requerida.
                                     </div>
                                 </div>                                            
                             </div>
                         </div>
+                    </div>
+                    <div class="mt-4 row">
+                        <div class="col-6">
+                            <label for="inputDeliveryAddress">Dirección de entrega</label>
+                        </div>
+                        <div class="col-6">
+                            <input wire:model.defer="delivery_address" type="text" class="form-control" placeholder="Direccion completa que incluya nombre edificio o conjunto" id="inputDeliveryAddress">
+                            @if ($errors->has('delivery_address'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('delivery_address') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="mt-4 row">
+                        <div class="col-6">
+                            <label for="textarea">¿Desea incluir kit de regalo?</label>
+                        </div>
+                        <div class="col-6">
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <input wire:model="gift_check" class="form-check-input" type="radio" name="gift_check" value="si"> Si
+                                </div>
+                                <div class="col-6">
+                                    <input wire:model="gift_check"   class="form-check-input" type="radio" name="gift_check" value="no"> No
+                                </div>
+                                <br>
+                                <br>
+                                <div class="col-12">
+                                <select wire:ignore.self wire:model="gift" class="form-select" style="display:none;" id="gift" >
+                                        <option>Elegir</option>
+                                        @foreach ($gift_sets as $gifts)
+                                            <option value="{{ $gifts->value }}">{{ $gifts->name }} - $ {{ number_format( $gifts->value, '0', ',', '.') }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -169,15 +208,29 @@
                                         <strong>Subtotal</strong>
                                     </td>
                                     <td class="right">
-                                        <i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->subtotal(),'2',',','.') }}
+                                        <i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->subtotal(), '2', ',', '.') }}
                                     </td>
                                 </tr>
+                                @if($this->gift)
+                                    <tr>
+                                        <td class="left">
+                                            <strong>Kit de regalo</strong>
+                                        </td>
+                                        <td class="right">
+                                            <i class="fas fa-dollar-sign"></i> {{ number_format((float)  $this->gift, '2', ',', '.') }}
+                                        </td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="left">
                                         <strong>Total</strong>
                                     </td>
                                     <td class="right">
-                                        <strong><i class="fas fa-dollar-sign"></i> {{number_format((float) Cart::instance('cart')->total(),'2',',','.') }}</strong>
+                                    @if($this->gift)
+                                        <strong><i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->subtotal() + 15000, '2', ',', '.') }}</strong>
+                                    @else
+                                        <strong><i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->total(), '2', ',', '.') }}</strong>
+                                    @endif   
                                     </td>
                                 </tr>
                                 <tr>
@@ -186,10 +239,10 @@
                                             <p>¿Aceptarías recibir una entrega parcial de tu pedido?</p>
                                             <div class="row text-center">
                                                 <div class="col-6">
-                                                    <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="obvio" > Obvio microbio                
+                                                    <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="si" > Si                
                                                 </div>
                                                 <div class="col-6">
-                                                    <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="pailas" > Pailas
+                                                    <input wire:model="radioButtom" class="form-check-input" type="radio" name="delivery" value="no" > No
                                                 </div>
                                             </div>
                                             @error($radioButtom) 
@@ -288,12 +341,26 @@
                                         <i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->subtotal(),'2',',','.') }}
                                     </td>
                                 </tr>
+                                @if($this->gift)
+                                    <tr>
+                                        <td class="left">
+                                            <strong>Kit de regalo</strong>
+                                        </td>
+                                        <td class="right">
+                                            <i class="fas fa-dollar-sign"></i> {{ number_format((float)  $this->gift, '2', ',', '.') }}
+                                        </td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="left">
                                         <strong>Total</strong>
                                     </td>
                                     <td class="right">
-                                        <strong><i class="fas fa-dollar-sign"></i> {{ number_format( (float)Cart::instance('cart')->total(),'2',',','.') }}</strong>
+                                        @if($this->gift)
+                                            <strong><i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->subtotal() + 15000, '2', ',', '.') }}</strong>
+                                        @else
+                                            <strong><i class="fas fa-dollar-sign"></i> {{ number_format((float) Cart::instance('cart')->total(), '2', ',', '.') }}</strong>
+                                        @endif 
                                     </td>
                                 </tr>
                             </tbody>

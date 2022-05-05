@@ -185,6 +185,15 @@
                 eval(date).set('date_order', $("#date_order").val());
             });
 
+            $('input[name=gift_check]').on('change', function() {
+                if ($(this).val() == 'si') {
+                    $("#gift").css("display","block");
+                }else{
+                    $("#gift").css("display","none");
+                    Livewire.emit('resetGitf')
+                }
+            });
+
         });
 
     </script>
