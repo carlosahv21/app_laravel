@@ -83,4 +83,4 @@ Route::middleware('auth')->group(function () {
         Artisan::call('storage:link');
     });
 });
-Route::get('/config-cache', function() {      $exitCode = Artisan::call('config:cache');      return '<h1>Clear Config cleared</h1>';  });
+Route::get('/config-cache', function() {      $exitCode = Artisan::call('config:cache');  $exitCode = Artisan::call('config:clear');    return '<h1>Clear Config cleared</h1>';  });
