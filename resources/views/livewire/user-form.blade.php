@@ -1,5 +1,5 @@
 <div>
-    <div class="row align-items-start p-2">
+    <div class="row align-items-start p-2" id="formUsers">
         <div class="col-6 p-2">
             <label for="roleTipo" class="form-label">Rol <span class="text-danger"> *</span></label>
             <select wire:model.defer="role" class="form-select" id="roleTipo">
@@ -114,7 +114,7 @@
         
     </div>
     <div class="d-flex justify-content-end py-4">
-        <button wire:click="save" class="btn btn-secondary">Guardar</button>
+        <button wire:click="save" class="btn btn-secondary" id="saveUsers">Guardar</button>
         <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
     </div>
 </div>

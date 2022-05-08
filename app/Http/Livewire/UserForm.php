@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserForm extends Component
 {
-    public $first_name, $last_name, $email, $phone, $date_birthday, $address, $neighborhood, $location, $city, $municipality, $role, $identificacion, $enrollment, $modelId;
+    public $first_name, $last_name, $email, $phone, $date_birthday, $address, $neighborhood, $location, $city, $role, $identificacion, $enrollment, $modelId;
     
     protected $listeners = [
         'getModelId',
@@ -30,7 +30,6 @@ class UserForm extends Component
         $this->neighborhood = $model->neighborhood;
         $this->location = $model->location;
         $this->city = $model->city;
-        $this->municipality = $model->municipality;
         $this->role = $model->role;
         $this->identificacion = $model->identificacion;
         $this->enrollment = $model->enrollment;
@@ -43,9 +42,10 @@ class UserForm extends Component
             $user = User::findOrFail($this->modelId);
         }else{
             $user = new User;
-            
+            $user->password = Hash::make('123456'); //solo cuando es un nuevo usuario 
+            $this->validate();
         }
-
+       
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->email = $this->email;
@@ -55,12 +55,9 @@ class UserForm extends Component
         $user->neighborhood = $this->neighborhood;
         $user->location = $this->location;
         $user->city = $this->city;
-        $user->municipality = $this->municipality;
         $user->role = $this->role;
         $user->identificacion = $this->identificacion;
-        $user->enrollment = $this->enrollment;
-        $user->password = Hash::make('123456');
-        $this->validate();
+        $user->enrollment = $this->enrollment;       
         
         $user->save();
         

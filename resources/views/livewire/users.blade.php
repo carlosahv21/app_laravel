@@ -93,8 +93,12 @@
                                 </td>
                                 <td>
                                     <a href="#" class="d-flex align-items-center">
+                                        @if($user->user_image)
+                                        <img src="{{ asset('/images_profile/'.$user->user_image) }}" class="avatar rounded-circle me-3" alt="{{  $user->first_name ." ". $user->last_name}}">
+                                        @else
                                         <img src="../assets/img/team/profile-picture-1.jpg" class="avatar rounded-circle me-3"
                                             alt="Avatar">
+                                        @endif
                                         <div class="d-block">
                                             <span class="fw-bold">{{ $user->first_name . " ". $user->last_name }}</span>
                                             <div class="small text-gray">{{ $user->email }}</div>
@@ -108,7 +112,7 @@
                                         <i class="fas fa-ellipsis-h"></i>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a wire:click="selectItem({{ $user->id }}, 'update')" id="updateButtonUser" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
+                                        <li><a wire:click="selectItem({{ $user->id }}, 'update')" class="dropdown-item btn-outline-gray-500"><i class="fas fa-edit"></i> Editar</a></li>
                                         @if ($user->role != 'admin')
                                             <li><button wire:click="selectItem({{ $user->id }}, 'delete')" class="dropdown-item btn-outline-gray-500 text-danger"><i class="fas fa-trash"></i> Eliminar</button></li>
                                         @endif
