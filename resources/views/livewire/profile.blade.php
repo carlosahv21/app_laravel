@@ -8,7 +8,7 @@
         </div>
         @endif
         <div class="card card-body border-0 shadow mb-4">
-            <h2 class="h5 mb-4">Informacion del Cliente</h2>
+            <h2 class="h5 mb-4">Informacion del Cliente </h2>
             <div>
                 <form wire:submit.prevent="save" action="#" method="POST">
                     <div class="row align-items-start p-2">
@@ -86,7 +86,7 @@
                             @endif
                         </div>
                         <div class="col-6 p-2">
-                            <label for="inputCiudad" class="form-label">Ciudad</label>
+                            <label for="inputCiudad" class="form-label">Ciudad/Municipio</label>
                             <input wire:model="user.city" type="text" class="form-control" placeholder="Ej: Barranquilla" id="inputCiudad">
                             @if ($errors->has('user.city'))
                                 <div class="invalid-feedback">
@@ -94,16 +94,7 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="col-6 p-2">
-                            <label for="inputMunicipio" class="form-label">Municipio</label>
-                            <input wire:model="user.municipality" type="text" class="form-control" placeholder="Ej: Tunja" id="inputMunicipio">
-                            @if ($errors->has('user.municipality'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('user.municipality') }}
-                                </div>
-                            @endif
-                        </div>
-                                               
+                                                                       
                         @if (auth()->user()->role == 'admin')
                             <div class="col-6 p-2">
                                 <label for="inputTipo" class="form-label">Rol <span class="text-danger"> *</span></label>

@@ -93,8 +93,12 @@
                                 </td>
                                 <td>
                                     <a href="#" class="d-flex align-items-center">
+                                        @if($user->user_image)
+                                        <img src="{{ asset('/images_profile/'.$user->user_image) }}" class="avatar rounded-circle me-3" alt="{{  $user->first_name ." ". $user->last_name}}">
+                                        @else
                                         <img src="../assets/img/team/profile-picture-1.jpg" class="avatar rounded-circle me-3"
                                             alt="Avatar">
+                                        @endif
                                         <div class="d-block">
                                             <span class="fw-bold">{{ $user->first_name . " ". $user->last_name }}</span>
                                             <div class="small text-gray">{{ $user->email }}</div>

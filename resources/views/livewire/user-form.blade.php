@@ -1,5 +1,5 @@
 <div>
-    <div class="row align-items-start p-2">
+    <div class="row align-items-start p-2" id="formUsers">
         <div class="col-6 p-2">
             <label for="roleTipo" class="form-label">Rol <span class="text-danger"> *</span></label>
             <select wire:model.defer="role" class="form-select" id="roleTipo">
@@ -37,7 +37,7 @@
                 </div>
             @endif
         </div>
-        <div class="col-6 p-2" ">
+        <div class="col-6 p-2 ">
             <label for="inputCelular" class="form-label">Celular</label>
             <input wire:model.defer="phone" type="text" class="form-control" placeholder="Ej: 311999999" id="inputCelular">
             @if ($errors->has('phone'))
@@ -84,20 +84,11 @@
             @endif
         </div>
         <div class="col-6 p-2">
-            <label for="inputCiudad" class="form-label">Ciudad</label>
+            <label for="inputCiudad" class="form-label">Ciudad/Municipio</label>
             <input wire:model="city" type="text" class="form-control" placeholder="Ej: Barranquilla" id="inputCiudad">
             @if ($errors->has('city'))
                 <div class="invalid-feedback">
                     {{ $errors->first('city') }}
-                </div>
-            @endif
-        </div>
-        <div class="col-6 p-2">
-            <label for="inputMunicipio" class="form-label">Municipio</label>
-            <input wire:model="municipality" type="text" class="form-control" placeholder="Ej: Tunja" id="inputMunicipio">
-            @if ($errors->has('municipality'))
-                <div class="invalid-feedback">
-                    {{ $errors->first('municipality') }}
                 </div>
             @endif
         </div>
@@ -123,7 +114,7 @@
         
     </div>
     <div class="d-flex justify-content-end py-4">
-        <button wire:click="save" class="btn btn-secondary">Guardar</button>
+        <button wire:click="save" class="btn btn-secondary" id="saveUsers">Guardar</button>
         <button type="button" class="btn btn-link text-gray-600 " data-bs-dismiss="modal">Cancelar</button>
     </div>
 </div>
