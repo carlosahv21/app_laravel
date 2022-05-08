@@ -37,7 +37,7 @@
                 </div>
             @endif
         </div>
-        <div class="col-6 p-2" ">
+        <div class="col-6 p-2 ">
             <label for="inputCelular" class="form-label">Celular</label>
             <input wire:model.defer="phone" type="text" class="form-control" placeholder="Ej: 311999999" id="inputCelular">
             @if ($errors->has('phone'))
@@ -84,20 +84,11 @@
             @endif
         </div>
         <div class="col-6 p-2">
-            <label for="inputCiudad" class="form-label">Ciudad</label>
+            <label for="inputCiudad" class="form-label">Ciudad/Municipio</label>
             <input wire:model="city" type="text" class="form-control" placeholder="Ej: Barranquilla" id="inputCiudad">
             @if ($errors->has('city'))
                 <div class="invalid-feedback">
                     {{ $errors->first('city') }}
-                </div>
-            @endif
-        </div>
-        <div class="col-6 p-2">
-            <label for="inputMunicipio" class="form-label">Municipio</label>
-            <input wire:model="municipality" type="text" class="form-control" placeholder="Ej: Tunja" id="inputMunicipio">
-            @if ($errors->has('municipality'))
-                <div class="invalid-feedback">
-                    {{ $errors->first('municipality') }}
                 </div>
             @endif
         </div>

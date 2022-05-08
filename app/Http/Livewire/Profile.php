@@ -22,27 +22,40 @@ class Profile extends Component
     ];
 
     public function rules() {
-        return [
-            'user.first_name' => 'required|max:15',
-            'user.last_name' => 'required|max:20',
-            'user.email' => 'required|email',
-            'user.phone' => 'required',
-            'user.date_birthday' => 'date',
-            'user.address' => 'required|max:40',
-            'user.neighborhood' => 'required',
-            'user.location' => 'required',
-            'user.city' => 'required',
-            'user.municipality' => 'required',
-            'user.role' => 'required',
-            'user.identificacion' => 'required',
-            
-        ];
-        if (auth()->user()->role == 'client'){
-            return [
+        
+        if (auth()->user()->role === 'client') {
+            $validate = [
+                'user.first_name' => 'required|max:15',
+                'user.last_name' => 'required|max:20',
+                'user.email' => 'required|email',
+                'user.phone' => 'required',
+                'user.date_birthday' => 'date',
+                'user.address' => 'required|max:40',
+                'user.neighborhood' => 'required',
+                'user.location' => 'required',
+                'user.city' => 'required',
+                'user.role' => 'required',
+                'user.identificacion' => 'required',
                 'user.confirm' => 'required',
-                'user.method' => 'max:20'
+                'user.method' => 'max:20'  
+            ];
+        }else{
+            $validate = [
+                'user.first_name' => 'required|max:15',
+                'user.last_name' => 'required|max:20',
+                'user.email' => 'required|email',
+                'user.phone' => 'required',
+                'user.date_birthday' => 'date',
+                'user.address' => 'required|max:40',
+                'user.neighborhood' => 'required',
+                'user.location' => 'required',
+                'user.city' => 'required',
+                'user.role' => 'required',
+                'user.identificacion' => 'required'  
             ];
         }
+        
+        return $validate;
     }
 
     public function mount() {
@@ -64,9 +77,13 @@ class Profile extends Component
         $this->validate();
         $this->user->email_verified_at = 'yes';
         $this->user->save();
-
-        if($this->user->advertisement != 'yes'){
-            $this->dispatchBrowserEvent('openModal', ['name' => 'advertisement']);
+        
+        if (auth()->user()->role === 'client') {
+            if($this->user->advertisement != 'yes'){
+                $this->dispatchBrowserEvent('openModal', ['name' => 'advertisement']);
+            }else{
+                $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Perfil salvado!']);
+            }
         }else{
             $this->dispatchBrowserEvent('notify', ['type' => 'success', 'message' => 'Perfil salvado!']);
         }
@@ -82,7 +99,7 @@ class Profile extends Component
         $filename = $this->upload->store('/', 'images_profile');
         $user->user_image = $filename; 
         $user->save();
-        $this->emit('refreshParent');
+        //$this->emit('refreshParent');
 
     } 
 
