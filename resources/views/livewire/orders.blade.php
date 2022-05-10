@@ -40,7 +40,7 @@
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-6">
-                                    <img src="{{ Storage::disk('products')->url($product->product_image) }}" class="img-fluid rounded-start" alt="...">
+                                    <img src="{{ Storage::disk('images_products')->url($product->product_image) }}" class="card-img-top img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card-body">

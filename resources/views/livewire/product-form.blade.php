@@ -54,7 +54,7 @@
                     @if ( $fileProducts )
                         <img class="rounded avatar-xl" src="{{ $fileProducts->temporaryUrl() }}" alt="cambia tu foto">
                     @else
-                        <img class="rounded avatar-xl" src="{{ Storage::disk('products')->url($this->seeFileProducts) }}" alt="cambia tu foto">
+                        <img class="rounded avatar-xl" src="{{ Storage::disk('images_products')->url($this->seeFileProducts) }}" alt="cambia tu foto">
                     @endif
                     
                     

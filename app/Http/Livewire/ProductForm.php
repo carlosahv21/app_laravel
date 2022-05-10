@@ -41,7 +41,7 @@ class ProductForm extends Component
 
         $this->validate();
 
-        $filename = $this->fileProducts->store('/', 'products');
+        $filename = $this->fileProducts->store('/', 'images_products');
 
         $product->name = $this->name;
         $product->reference = $this->reference;

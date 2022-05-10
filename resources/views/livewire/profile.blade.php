@@ -145,7 +145,7 @@
                         @if ($upload)
                         <img class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" src="{{ $upload->temporaryUrl() }}" alt="change avatar" width="100" height="100">                        
                         @elseif($user->user_image)
-                        <img src="{{ asset('/images_profile/'.$user->user_image) }}" }}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="{{  $user->first_name ." ". $user->last_name}}">
+                        <img src="{{ asset('/images_profile/'.$user->user_image) }}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="{{  $user->first_name ." ". $user->last_name}}">
                         @else
                         <img src="../assets/img/team/profile-picture-1.jpg" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="{{  $user->first_name ." ". $user->last_name}}">
                         @endif
