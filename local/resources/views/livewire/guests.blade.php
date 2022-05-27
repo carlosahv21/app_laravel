@@ -33,7 +33,7 @@
     </div>
     <div class="row">
         <span class="small text-secondary mt-3" style="font-size: 0.75em;"> * Recuerda avisarle a tus amig@s que los vamos a contactar, no queremos incomodarl@s. Entre más referidos nos des, más beneficios recibes.</span>
-        <span class="small text-secondary mt-3" style="font-size: 0.75em;"> *  asd.</span>
+        <span class="small text-secondary mt-3" style="font-size: 1em;"> <b>*  Recibe un obsequio por tus referidos <i class="fas fa-gift"></i> </b></span>
     </div>
     <div class="d-flex justify-content-end py-4">
         <button wire:click="save" class="btn btn-secondary">Enviar amigos</button>
